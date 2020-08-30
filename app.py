@@ -16,7 +16,7 @@ if ENV == 'dev':
     app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///myDB.db'
 else:
     app.denug = False
-    app.config['SQLALCHEMY_DATABASE_URI'] = 'postgres://jsptfbgfopybdn:357970d51eb33f0480998bd80dd9a9bfee953af5539ff019f31d7105618252e1@ec2-54-235-192-146.compute-1.amazonaws.com:5432/ddu1m4nfcaq9ro'
+    app.config['SQLALCHEMY_DATABASE_URI'] = 'postgres://wstedomnwwbwmb:d82f1a6423b821430cd31a3e6347984f8a9c7a2c095059d7d7e9d6b5ff0188c3@ec2-54-86-57-171.compute-1.amazonaws.com:5432/d7pc6cj8s2ua14'
 
 app.config['FILE_UPLOAD']= 'C:/Users/Top/Documents/liad2/static/uploads'
 app.config['ALLOWED_FILE_EXTENSIONS'] = ['XLSX']
@@ -27,7 +27,8 @@ db = SQLAlchemy(app)
 class Try_1(db.Model):
     __tablename__ = "Try_1"
 
-    id = db.Column(db.Integer, primary_key = True)
+    # id = db.Column(db.Integer, primary_key = True)
+    id = db.Column(db.Integer, index = True)
     bbb = db.Column(db.Integer, index = True)
     ccc = db.Column(db.Integer, index = True)
     ddd = db.Column(db.Integer, index = True)
