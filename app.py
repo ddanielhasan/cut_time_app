@@ -9,14 +9,14 @@ import flask_excel as excel
 
 
 app = Flask(__name__)
-ENV = 'prod'
+ENV = 'production'
 
 if ENV == 'dev':
     app.denug = True
     app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///myDB.db'
 else:
     app.denug = False
-    app.config['SQLALCHEMY_DATABASE_URI'] = 'postgres://wstedomnwwbwmb:d82f1a6423b821430cd31a3e6347984f8a9c7a2c095059d7d7e9d6b5ff0188c3@ec2-54-86-57-171.compute-1.amazonaws.com:5432/d7pc6cj8s2ua14'
+    app.config['SQLALCHEMY_DATABASE_URI'] = 'postgres://hjhsprtbfnahgt:4a3ac5df6d9e3db852691fcc734f659e740a896fa9ccd27e3ca9b0e1d80c5922@ec2-52-72-34-184.compute-1.amazonaws.com:5432/d4cs2h729n3io0'
 
 app.config['FILE_UPLOAD']= 'C:/Users/Top/Documents/liad2/static/uploads'
 app.config['ALLOWED_FILE_EXTENSIONS'] = ['XLSX']
@@ -67,7 +67,7 @@ def home():
                 for rew in range(new_df.shape[0]):
                     # print (new_df.iloc[rew])
                     x=6
-                new_df.to_sql(name='Try_1', con=db.engine, if_exists='replace',  index=False)
+                new_df.to_sql(name='Try_1', con=db.engine, if_exists='append',  index=False)
                 db.session.commit()
 
                 all_data = Try_1.query.all()
