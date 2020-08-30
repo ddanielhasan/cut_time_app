@@ -27,8 +27,7 @@ db = SQLAlchemy(app)
 class Try_1(db.Model):
     __tablename__ = "Try_1"
 
-    # id = db.Column(db.Integer, primary_key = True)
-    id = db.Column(db.Integer, index = True)
+    id = db.Column(db.Integer, primary_key = True)
     bbb = db.Column(db.Integer, index = True)
     ccc = db.Column(db.Integer, index = True)
     ddd = db.Column(db.Integer, index = True)
@@ -68,7 +67,7 @@ def home():
                 for rew in range(new_df.shape[0]):
                     # print (new_df.iloc[rew])
                     x=6
-                new_df.to_sql(name='Try_1', con=db.engine, if_exists='append',  index=False)
+                new_df.to_sql(name='Try_1', con=db.engine, if_exists='replace',  index=False)
                 db.session.commit()
 
                 all_data = Try_1.query.all()
