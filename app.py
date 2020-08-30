@@ -97,7 +97,10 @@ def home():
                 #finally return the file
                 return send_file(output, attachment_filename="testing.xlsx", as_attachment=True)
 
-    return render_template('index.html')
+    dataframe = pd.read_sql('''SELECT * FROM "Try_1"''', con = db.engine)
+    dataframe = dataframe.to_html()
+
+    return render_template('index.html',dataframe=dataframe)
 
 # @app.route("/export", methods=['GET'])
 # def export_records():
