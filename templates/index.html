@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>cut-time</title>
+</head>
+<body>
+    <br><br>
+    <div>
+      <form action="/" method="POST" enctype="multipart/form-data">
+      <label>Select File</label>
+      <input type="file" name="ecxel" id="file">
+      <label for="file">iam wiating</label>
+      <button type="submit" name="submit_button" value="Do Something">up load file</button>
+      <button type="submit" name="submit_button" value="export">export file</button>
+
+      </form>
+    </div>
+    <p>{{tabel | safe}}</p>    
+
+    {% for rew in all_data %}
+    <li>{{rew.id}},{{rew.bbb}},{{rew.ccc}},{{rew.ddd}},{{rew.eee}} </li>
+    {% endfor %}
+    <p>{{dataframe | safe}}</p>
+    
+</body>
+</html>
