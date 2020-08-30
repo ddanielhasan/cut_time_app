@@ -57,7 +57,7 @@ def home():
             else:
                 filename = secure_filename(ecxel_file.filename)
                 print(ecxel_file)
-                ecxel_file.save(os.path.join(app.config['FILE_UPLOAD'], filename))
+                # ecxel_file.save(os.path.join(app.config['FILE_UPLOAD'], filename))
                 print('file saved')
                 #printing the ecxel
                 new_df = pd.read_excel(ecxel_file)
