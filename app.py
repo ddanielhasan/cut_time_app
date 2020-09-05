@@ -130,15 +130,18 @@ def home():
                 print('file is not xlsx')
                 return redirect(request.url)
             else:
-                filename = secure_filename(ecxel_file.filename)
-                print(filename)
+                # filename = secure_filename(ecxel_file.filename)
+                # print(filename)
                 # print(ecxel_file)
                 # ecxel_file.save(os.path.join(app.config['FILE_UPLOAD'], filename))
                 # print('file saved')
                 #printing the ecxel
                 new_df = pd.read_excel(ecxel_file).copy()
                 
-                player_name = 'Daniel Hasan'
+                ext = ecxel_file.filename.rsplit('.')[0]
+                ext2 = ext.rsplit('_')[-2:]
+                player_name= ' '.join(ext2)
+                print(player_name)
                 # new_df = pd.read_excel(new_file).copy()
                 to_drop = ['Date', 'Unnamed: 1','score','InStat Index']
                 new_df.drop(columns=to_drop, inplace=True)
@@ -147,8 +150,10 @@ def home():
                 new_df.rename(columns={'players name':'players_name','Chances successful':'Chances_successful', "Chances, % of conversion":'Chances_present_of_conversion', 'Сhances created':'Сhances_created', 'Fouls suffered':'Fouls_suffered', 'Yellow cards':'Yellow_cards', 'Red cards':'Red_cards', 'Shots on target':'Shots_on_target','xG (Expected goals)':'Expected_goals', 'Accurate passes, %':'Accurate_passes_present', 'Key passes':'Key_passes', 'Key passes accuracy, %':'Key_passes_accuracy_present', 'Accurate crosses, %':'Accurate_crosses_present', 'Lost balls':'Lost_balls', "Lost balls in own half":"Lost_balls_in_own_half", 'Ball recoveries':'Ball_recoveries', "Ball recoveries in opponent's half":'Ball_recoveries_in_opponents_half', 'Challenges won, %':'Challenges_won_present', 'Defensive challenges':'Defensive_challenges', 'Challenges in defence won, %':'Challenges_in_defence_won_present', 'Attacking challenges':'Attacking_challenges', 'Challenges in attack / won, %':'Challenges_in_attack__won_present', 'Air challenges':'Air_challenges', 'Air challenges won, %':'Air_challenges_won_present', 'Successful dribbles, %':'Successful_dribbles_present', 'Tackles won, %':'Tackles_won_present', 'Ball interceptions':'Ball_interceptions', 'Free ball pick ups':'Free_ball_pick_ups'}, inplace=True)
                 def delete(item):
                     if item == "-":
-                        item = ""
+                        item = 0
                         return item
+                    elif '%' in str(item):
+                        return item[:item.find('%')]
                     else:
                         return item
                 new_df = new_df.applymap(delete)
@@ -158,7 +163,7 @@ def home():
                 new_df.to_sql(name='all_players', con=db.engine, if_exists='append',  index=False)
                 db.session.commit()
 
-                all_data = all_players.query.all()
+                all_data = Player.query.all()
                 tabel=new_df.to_html()
 
                 dataframe = pd.read_sql('''SELECT * FROM all_players''', con = db.engine)
