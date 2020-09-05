@@ -104,7 +104,7 @@ def home():
                 filename = secure_filename(ecxel_file.filename)
                 print(ecxel_file)
                 # ecxel_file.save(os.path.join(app.config['FILE_UPLOAD'], filename))
-                print('file saved')
+                # print('file saved')
                 #printing the ecxel
                 new_df = pd.read_excel(ecxel_file)
                 print(new_df)
@@ -124,6 +124,41 @@ def home():
                 dataframe = dataframe.to_html()
                 
             return render_template('index.html',all_data=all_data , tabel=tabel, dataframe=dataframe)
+        elif request.form['submit_button'] == '"Upload to palyer tabel"':
+            ecxel_file = request.files['ecxel']
+            if not allowed_file(ecxel_file.filename):
+                print('file is not xlsx')
+                return redirect(request.url)
+            else:
+                filename = secure_filename(ecxel_file.filename)
+                print(filename)
+                # print(ecxel_file)
+                # ecxel_file.save(os.path.join(app.config['FILE_UPLOAD'], filename))
+                # print('file saved')
+                #printing the ecxel
+                new_df = pd.read_excel(ecxel_file).copy()
+                
+                player_name = 'Daniel Hasan'
+                # new_df = pd.read_excel(new_file).copy()
+                to_drop = ['Date', 'Unnamed: 1','score','InStat Index']
+                new_df.drop(columns=to_drop, inplace=True)
+                new_df.insert(0,'players name', player_name, True)
+                # column_names= list(new_df.columns.values.tolist())
+                new_df.rename(columns={'players name':'players_name','Chances successful':'Chances_successful', "Chances, % of conversion":'Chances_present_of_conversion', 'Сhances created':'Сhances_created', 'Fouls suffered':'Fouls_suffered', 'Yellow cards':'Yellow_cards', 'Red cards':'Red_cards', 'Shots on target':'Shots_on_target','xG (Expected goals)':'Expected_goals', 'Accurate passes, %':'Accurate_passes_present', 'Key passes':'Key_passes', 'Key passes accuracy, %':'Key_passes_accuracy_present', 'Accurate crosses, %':'Accurate_crosses_present', 'Lost balls':'Lost_balls', "Lost balls in own half":"Lost_balls_in_own_half", 'Ball recoveries':'Ball_recoveries', "Ball recoveries in opponent's half":'Ball_recoveries_in_opponents_half', 'Challenges won, %':'Challenges_won_present', 'Defensive challenges':'Defensive_challenges', 'Challenges in defence won, %':'Challenges_in_defence_won_present', 'Attacking challenges':'Attacking_challenges', 'Challenges in attack / won, %':'Challenges_in_attack__won_present', 'Air challenges':'Air_challenges', 'Air challenges won, %':'Air_challenges_won_present', 'Successful dribbles, %':'Successful_dribbles_present', 'Tackles won, %':'Tackles_won_present', 'Ball interceptions':'Ball_interceptions', 'Free ball pick ups':'Free_ball_pick_ups'}, inplace=True)
+                # print(column_names)
+
+                new_df.to_sql(name='all_players', con=db.engine, if_exists='append',  index=False)
+                db.session.commit()
+
+                all_data = all_players.query.all()
+                print(all_data)
+                tabel=new_df.to_html()
+
+                dataframe = pd.read_sql('''SELECT * FROM "all_players"''', con = db.engine)
+                dataframe = dataframe.to_html()
+                
+            return render_template('index.html',all_data=all_data , tabel=tabel, dataframe=dataframe)
+
         elif request.form['submit_button'] == 'export':
                 dataframe = pd.read_sql('''SELECT * FROM "Try_1"''', con = db.engine)
                 #create an output stream
