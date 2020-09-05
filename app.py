@@ -137,9 +137,11 @@ def home():
                 # print('file saved')
                 #printing the ecxel
                 new_df = pd.read_excel(ecxel_file).copy()
-                
+                print(ecxel_file.filename)
                 ext = ecxel_file.filename.rsplit('.')[0]
-                ext2 = ext.rsplit('_')[-2:]
+                print(ext)
+                ext2 = ext.rsplit('_')[-1:]
+                print(ext2)
                 player_name= ' '.join(ext2)
                 print(player_name)
                 # new_df = pd.read_excel(new_file).copy()
@@ -190,7 +192,7 @@ def home():
                 #finally return the file
                 return send_file(output, attachment_filename="testing.xlsx", as_attachment=True)
 
-    dataframe = pd.read_sql('''SELECT * FROM "Try_1"''', con = db.engine)
+    dataframe = pd.read_sql('''SELECT * FROM all_players''', con = db.engine)
     dataframe = dataframe.to_html()
 
     return render_template('index.html',dataframe=dataframe)
