@@ -36,7 +36,7 @@ class Try_1(db.Model):
 class Player(db.Model):
     __tablename__ = "all_players"
 
-    players name = db.Column(db.String, index = True)
+    players_name = db.Column(db.String, index = True)
     Opponent = db.Column(db.String, index = True)
     Position = db.Column(db.String, nullable=True, index = True)
     Goals = db.Column(db.Integer, nullable=True, index = True)
