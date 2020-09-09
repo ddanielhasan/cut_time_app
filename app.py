@@ -129,6 +129,9 @@ class Player(db.Model):
     Free_ball_pick_ups = db.Column(db.Integer, nullable=True, index = True)
 
 db.create_all()
+
+list_of_players_names=[]
+
 def allowed_file(filename):
     if not "." in filename:
         return False
@@ -138,11 +141,10 @@ def allowed_file(filename):
     else:
         return False
 
-
 @app.route("/", methods=['GET', 'POST'])
 def home():
     if request.method == 'POST':
-        if request.form['submit_button'] == 'Do Something':
+        if request.form['submit_button'] == 'Do Something': #regular upload
             ecxel_file = request.files['ecxel']
             if not allowed_file(ecxel_file.filename):
                 print('file is not xlsx')
@@ -160,18 +162,18 @@ def home():
                 for rew in range(new_df.shape[0]):
                     # print (new_df.iloc[rew])
                     x=6
-                new_df.to_sql(name='Try_1', con=db.engine, if_exists='append',  index=False)
+                new_df.to_sql(name='player_Name', con=db.engine, if_exists='append',  index=False)
                 db.session.commit()
 
-                all_data = Try_1.query.all()
+                all_data = Player_Name.query.all()
                 print(all_data)
                 tabel=new_df.to_html()
 
-                dataframe = pd.read_sql('''SELECT * FROM "Try_1"''', con = db.engine)
+                dataframe = pd.read_sql('''SELECT * FROM "player_Name"''', con = db.engine)
                 dataframe = dataframe.to_html()
                 
             return render_template('index.html',all_data=all_data , tabel=tabel, dataframe=dataframe)
-        elif request.form['submit_button'] == 'Upload to palyer tabel':
+        elif request.form['submit_button'] == 'Upload to palyer tabel': #upload to data tabel
             ecxel_file = request.files['ecxel']
             if not allowed_file(ecxel_file.filename):
                 print('file is not xlsx')
@@ -209,13 +211,13 @@ def home():
                               
                 print(new_df)
 
-                new_df.to_sql(name='all_players', con=db.engine, if_exists='append',  index=False)
+                new_df.to_sql(name='players_data', con=db.engine, if_exists='append',  index=False)
                 db.session.commit()
 
                 all_data = Player.query.all()
                 tabel=new_df.to_html()
 
-                dataframe = pd.read_sql('''SELECT * FROM all_players''', con = db.engine)
+                dataframe = pd.read_sql('''SELECT * FROM players_data''', con = db.engine)
                 dataframe = dataframe.to_html()
                 
             return render_template('index.html',all_data=all_data , tabel=tabel, dataframe=dataframe)
@@ -289,10 +291,10 @@ def home():
                 dataframe = pd.read_sql('''SELECT * FROM player_Average''', con = db.engine)
                 dataframe = dataframe.to_html()
 
-            return render_template('index.html',all_data=all_data , tabel=tabel, dataframe=dataframe)        
+            return render_template('index.html',all_data=all_data , tabel=tabel, dataframe=dataframe)
 
         elif request.form['submit_button'] == 'export':
-                dataframe = pd.read_sql('''SELECT * FROM "Try_1"''', con = db.engine)
+                dataframe = pd.read_sql('''SELECT * FROM "player_Name"''', con = db.engine)
                 #create an output stream
                 output = BytesIO()
                 writer = pd.ExcelWriter(output, engine='xlsxwriter')
@@ -319,4 +321,3 @@ def home():
 # def export_records():
 #     return excel.make_response_from_array([[1, 2], [3, 4]], "csv",
 #                                           file_name="export_data")
-
