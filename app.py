@@ -39,6 +39,7 @@ class Player_Average(db.Model):
 
     id = db.Column(db.Integer, primary_key = True)
     player_average_id = db.Column(db.Integer,db.ForeignKey('player_Name.id'))
+    players_name = db.Column(db.String, index = True)
     Opponent = db.Column(db.String, index = True)
     Position = db.Column(db.String, nullable=True, index = True)
     Goals = db.Column(db.Integer, nullable=True, index = True)
@@ -274,7 +275,7 @@ def home():
 
                 df_average = new_df[new_df["Opponent"] == "Average per match"]
                 # print(df_average)
-                to_drop = ["players_name", 'player_id']
+                to_drop = ['player_id']
                 df_average.drop(columns=to_drop, inplace=True)
                 df_average.rename(columns={'player_id':'player_average_id'})
                 df_average.insert(0,'player_average_id', player_id_number, True)
@@ -288,7 +289,7 @@ def home():
 
                 all_data = Player.query.all()
                 tabel=new_df.to_html()
-                dataframe = pd.read_sql('''SELECT * FROM player_Average''', con = db.engine)
+                dataframe = pd.read_sql('''SELECT * FROM "player_Average"''', con = db.engine)
                 dataframe = dataframe.to_html()
 
             return render_template('index.html',all_data=all_data , tabel=tabel, dataframe=dataframe)
@@ -311,11 +312,50 @@ def home():
                 output.seek(0)
                 #finally return the file
                 return send_file(output, attachment_filename="testing.xlsx", as_attachment=True)
+        
+        elif request.form['submit_button'] == 'show_parameters':
+            parameters_1 = request.form["parameters_1"]
+            parameters_2 = request.form["parameters_2"]
+            player_1 = request.form["player_1"]
+            player_2 = request.form["player_2"]
+            player_3 = request.form["player_3"]
+
+            dataframe = pd.read_sql('''SELECT * FROM "player_Average"''', con = db.engine)
+            player_Name_options_list = dataframe['players_name'].tolist()
+            tabel_parameters = dataframe.columns.values.tolist()
+
+            print(parameters_1)
+            print(parameters_2)
+            print(player_1,player_2,player_3)
+
+            tabel_of_firest_parameter = dataframe[(dataframe['players_name']==player_1)]
+
+            tabel_of_firest_parameter = dataframe[(dataframe['players_name']==player_1) | (dataframe['players_name']==player_2)| (dataframe['players_name']==player_3)]
+            tabel_of_firest_parameter = tabel_of_firest_parameter[["players_name", parameters_1, parameters_2]]
+            print(tabel_of_firest_parameter)
+            tabel_of_firest_parameter = tabel_of_firest_parameter.to_html()
+
+            
+            
+
+            return render_template('index.html',dataframe=tabel_of_firest_parameter, tabel_parameters=tabel_parameters,player_Name_options_list=player_Name_options_list)
+            # return redirect(request.url)
+
+
 
     dataframe = pd.read_sql('''SELECT * FROM "player_Average"''', con = db.engine)
+    player_Name_options_list = dataframe['players_name'].tolist()
+    tabel_parameters = dataframe.columns.values.tolist()
     dataframe = dataframe.to_html()
 
-    return render_template('index.html',dataframe=dataframe)
+    # tabel_of_firest_parameter = dataframe[(dataframe['players_name']=="Ivan Nasberg") | (dataframe['players_name']=="Herolind Shala")]
+    # tabel_of_firest_parameter = tabel_of_firest_parameter[["players_name", 'Dribbles', 'Tackles']]
+    # print(tabel_of_firest_parameter.to_numpy())
+    # print(tabel_parameters)
+    # print(player_Name_options_list)
+    # tabel_of_firest_parameter = tabel_of_firest_parameter.to_html()
+
+    return render_template('index.html',dataframe=dataframe, tabel_parameters=tabel_parameters,player_Name_options_list=player_Name_options_list)
 
 # @app.route("/export", methods=['GET'])
 # def export_records():
