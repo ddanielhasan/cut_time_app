@@ -334,13 +334,18 @@ def home():
             tabel_of_firest_parameter = tabel_of_firest_parameter[["players_name", parameters_1, parameters_2]]
             print(tabel_of_firest_parameter)
             tabel_of_firest_parameter['ratio_A/B'] = tabel_of_firest_parameter[parameters_1]/tabel_of_firest_parameter[parameters_2]
-
+            dan_1=tabel_of_firest_parameter.columns.values.tolist()
+            dan_2=tabel_of_firest_parameter.iloc[0].tolist()
+            dan_3=tabel_of_firest_parameter.iloc[1].tolist()
+            dan_4=tabel_of_firest_parameter.iloc[2].tolist()
+            print(dan_1)
+            print(dan_2)
+            print(dan_3)
+            print(dan_4)
             tabel_of_firest_parameter = tabel_of_firest_parameter.to_html()
 
-            
-            
 
-            return render_template('index.html',dataframe=tabel_of_firest_parameter, tabel_parameters=tabel_parameters,player_Name_options_list=player_Name_options_list)
+            return render_template('index.html',dataframe=tabel_of_firest_parameter, tabel_parameters=tabel_parameters,player_Name_options_list=player_Name_options_list,dan_1=dan_1,dan_2=dan_2,dan_3=dan_3,dan_4=dan_4)
             # return redirect(request.url)
 
 

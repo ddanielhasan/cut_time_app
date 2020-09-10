@@ -6,6 +6,35 @@
     <title>cut-time</title>
 </head>
 <body>
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script type="text/javascript">
+      google.charts.load('current', {'packages':['bar']});
+      google.charts.setOnLoadCallback(drawChart);
+
+      function drawChart() {
+        var data = google.visualization.arrayToDataTable([
+          {{dan_1| safe}},
+          {{dan_2| safe}},
+          {{dan_3| safe}},
+          {{dan_4| safe}},
+        ]);
+
+        var options = {
+          chart: {
+            title: 'Player performance',
+            subtitle: 'Comparison of parameters: 2020',
+          },
+          bars: 'horizontal' // Required for Material Bar Charts.
+        };
+
+        var chart = new google.charts.Bar(document.getElementById('barchart_material'));
+
+        chart.draw(data, google.charts.Bar.convertOptions(options));
+      }
+    </script>
+
+
+    
     <h1>The world's best football app</h1>
         <h3>1)Can upload player tables.</h3>
         <h3>2)Can compare player data.</h3>
@@ -15,7 +44,18 @@
     
     <div>
       <form action="/" method="POST" enctype="multipart/form-data">
-        
+
+        <label>Select File</label>
+        <input type="file" name="ecxel" id="file">
+        <label for="file">Ahead to the next big thing-></label>
+        <!--
+        <button type="submit" name="submit_button" value="Do Something">2)Upload the file</button>
+        <button type="submit" name="submit_button" value="export">3) Export the file</button>
+        <button type="submit" name="submit_button" value="Upload to palyer tabel">4)Upload to player tabel </button>
+        <br>
+        -->
+        <button type="submit" name="submit_button" value="Upload to player_Name tabel">5)Upload to all three tabels </button>
+        <br>
         <label for="parameters">Please choose 2 parameters </label>
         <select id="parameters" name= parameters_1 method="GET" action="/">
             {% for parameter in tabel_parameters %}
@@ -47,25 +87,12 @@
 
         <button type="submit" name="submit_button" value="show_parameters">6) show_parameters </button>
 
-
-        <br><br>
-        <label>Select File</label>
-        <input type="file" name="ecxel" id="file">
-        <label for="file">Ahead to the next big thing-></label>
-        <!--
-        <button type="submit" name="submit_button" value="Do Something">2)Upload the file</button>
-        <button type="submit" name="submit_button" value="export">3) Export the file</button>
-        <button type="submit" name="submit_button" value="Upload to palyer tabel">4)Upload to player tabel </button>
-        <br>
-        -->
-        <button type="submit" name="submit_button" value="Upload to player_Name tabel">5)Upload to all three tabels </button>
-
       </form>
     </div>
-    <p>{{dataframe | safe}}</p>
-    <!--
     <div id="barchart_material" style="width: 900px; height: 500px;"></div>
-        -->
+
+    <p>{{dataframe | safe}}</p>
+    
     <p>{{tabel | safe}}</p>    
 
     {% for rew in all_data %}
