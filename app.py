@@ -333,6 +333,8 @@ def home():
             tabel_of_firest_parameter = dataframe[(dataframe['players_name']==player_1) | (dataframe['players_name']==player_2)| (dataframe['players_name']==player_3)]
             tabel_of_firest_parameter = tabel_of_firest_parameter[["players_name", parameters_1, parameters_2]]
             print(tabel_of_firest_parameter)
+            tabel_of_firest_parameter['ratio_A/B'] = tabel_of_firest_parameter[parameters_1]/tabel_of_firest_parameter[parameters_2]
+
             tabel_of_firest_parameter = tabel_of_firest_parameter.to_html()
 
             
