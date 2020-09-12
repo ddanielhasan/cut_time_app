@@ -1,0 +1,101 @@
+{% extends "base.html"  %}
+
+{% block content %}
+
+
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script type="text/javascript">
+      google.charts.load('current', {'packages':['corechart']});
+      google.charts.setOnLoadCallback(drawChart);
+
+      function drawChart() {
+        var data = google.visualization.arrayToDataTable([
+          ['Age', 'Weight'],
+          [ 8,      12],
+          [ 4,      5.5],
+          [ 11,     14],
+          [ 4,      5],
+          [ 3,      3.5],
+          [ 6.5,    7]
+        ]);
+
+        var options = {
+          title: 'Age vs. Weight comparison',
+          hAxis: {title: 'Age', minValue: 0, maxValue: 15},
+          vAxis: {title: 'Weight', minValue: 0, maxValue: 15},
+          legend: 'none'
+        };
+
+        var chart = new google.visualization.ScatterChart(document.getElementById('chart_div'));
+
+        chart.draw(data, options);
+      }
+    </script>
+
+<form action="/scatter" method="POST" enctype="multipart/form-data">
+
+    <label for="parameters">Please choose 2 parameters </label>
+        <select id="parameters" name= parameters_1 method="GET" action="/">
+            {% for parameter in tabel_parameters %}
+            <option value= "{{parameter}}" SELECTED>{{parameter}}</option>
+            {% endfor %}
+        </select>
+        <select name= parameters_2 method="GET" action="/">
+            {% for parameter in tabel_parameters %}
+            <option value= "{{parameter}}" SELECTED>{{parameter}}</option>
+            {% endfor %}
+        </select>
+        <br>
+
+    <label for="scatter">Please choose 8 different players </label>
+        <select id=scatter name= player_1 method="GET" action="/scatter">
+            {% for player in player_Name_options_list %}
+            <option value= "{{player}}" SELECTED>{{player}}</option>
+            {% endfor %}
+        </select>
+        <select name= player_2 method="GET" action="/scatter">
+            {% for player in player_Name_options_list %}
+            <option value= "{{player}}" SELECTED>{{player}}</option>
+            {% endfor %}
+        </select>
+        <select name= player_3 method="GET" action="/scatter">
+            {% for player in player_Name_options_list %}
+            <option value= "{{player}}" SELECTED>{{player}}</option>
+            {% endfor %}
+        </select>
+        <br>
+        <select name= player_4 method="GET" action="/scatter">
+            {% for player in player_Name_options_list %}
+            <option value= "{{player}}" SELECTED>{{player}}</option>
+            {% endfor %}
+        </select>
+        <select name= player_5 method="GET" action="/scatter">
+            {% for player in player_Name_options_list %}
+            <option value= "{{player}}" SELECTED>{{player}}</option>
+            {% endfor %}
+        </select>
+        <select name= player_6 method="GET" action="/scatter">
+            {% for player in player_Name_options_list %}
+            <option value= "{{player}}" SELECTED>{{player}}</option>
+            {% endfor %}
+        </select>
+        <br>
+        <select name= player_7 method="GET" action="/scatter">
+            {% for player in player_Name_options_list %}
+            <option value= "{{player}}" SELECTED>{{player}}</option>
+            {% endfor %}
+        </select>
+        <select name= player_8 method="GET" action="/scatter">
+            {% for player in player_Name_options_list %}
+            <option value= "{{player}}" SELECTED>{{player}}</option>
+            {% endfor %}
+        </select>
+    <button type="submit" name="submit_button" value="show_scatter">show scatter </button>
+</form>
+
+<div id="chart_div" style="width: 900px; height: 500px;"></div>
+
+<p>{{dataframe | safe}}</p>
+
+
+{% endblock %}

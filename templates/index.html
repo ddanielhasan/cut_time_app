@@ -1,3 +1,4 @@
+<!--
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -5,7 +6,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>cut-time</title>
 </head>
+
 <body>
+-->
+{% extends "base.html"  %}
+{% block content %}
+
+
     <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
     <script type="text/javascript">
       google.charts.load('current', {'packages':['bar']});
@@ -35,11 +42,9 @@
 
 
     
-    <h1>The world's best football app</h1>
-        <h3>1)Can upload player tables.</h3>
-        <h3>2)Can compare player data.</h3>
-        <h3>3)In the future Eyal Gabai will be the king</h3>
-    <p>Next step: View data on graphs, Download a file of comparison results.</P>
+        <h4>1)Can upload player tables.</h>
+        <h4>2)Can compare player data In three different ways.</h4>
+      <h4>Next step: View data on graphs in real-time.</h4>
 
     
     <div>
@@ -99,6 +104,9 @@
     <li>{{rew.id}},{{rew.bbb}},{{rew.ccc}},{{rew.ddd}},{{rew.eee}} </li>
     {% endfor %}
     
-    
-</body>
+{% endblock %}
+  
+<!--
+  </body>
 </html>
+-->

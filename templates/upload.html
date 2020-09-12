@@ -1,1 +1,15 @@
-{{name}}
+{% extends "base.html"  %}
+
+{% block content %}
+
+    <h1>Download files</h1>
+    <p>
+        You can download a file of the average of all the parameters of all the players
+    </p>
+    <form action="/upload" method="POST" enctype="multipart/form-data">
+
+    <button type="submit" name="submit_button" value="export">export all average tabel</button>
+
+    </form>
+
+{% endblock %}
