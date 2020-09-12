@@ -328,7 +328,7 @@ def home():
             print(parameters_2)
             print(player_1,player_2,player_3)
 
-            tabel_of_firest_parameter = dataframe[(dataframe['players_name']==player_1)]
+            # tabel_of_firest_parameter = dataframe[(dataframe['players_name']==player_1)]
 
             tabel_of_firest_parameter = dataframe[(dataframe['players_name']==player_1) | (dataframe['players_name']==player_2)| (dataframe['players_name']==player_3)]
             tabel_of_firest_parameter = tabel_of_firest_parameter[["players_name", parameters_1, parameters_2]]
@@ -349,22 +349,162 @@ def home():
             # return redirect(request.url)
 
 
+    #regualr
+    dataframe = pd.read_sql('''SELECT * FROM "player_Average"''', con = db.engine)
+    player_Name_options_list = dataframe['players_name'].tolist()
+    tabel_parameters = dataframe.columns.values.tolist()
+    # dataframe = dataframe.to_html()
+
+    tabel_of_firest_parameter = dataframe[(dataframe['players_name']=="Ivan Nasberg") | (dataframe['players_name']=="Herolind Shala") | (dataframe['players_name']=="Luis Felipe")]
+    tabel_of_firest_parameter = tabel_of_firest_parameter[["players_name", 'Challenges', 'Challenges_in_defence_won_present']]
+    tabel_of_firest_parameter['ratio_A/B'] = tabel_of_firest_parameter['Challenges_in_defence_won_present']/tabel_of_firest_parameter['Challenges']
+    dan_1=tabel_of_firest_parameter.columns.values.tolist()
+    dan_2=tabel_of_firest_parameter.iloc[0].tolist()
+    dan_3=tabel_of_firest_parameter.iloc[1].tolist()
+    dan_4=tabel_of_firest_parameter.iloc[2].tolist()
+    dataframe = tabel_of_firest_parameter.to_html()
+
+    return render_template('index.html',dataframe=dataframe, tabel_parameters=tabel_parameters,player_Name_options_list=player_Name_options_list, dan_1=dan_1,dan_2=dan_2,dan_3=dan_3,dan_4=dan_4)
+
+# @app.route("/export", methods=['GET'])
+# def export_records():
+#     return excel.make_response_from_array([[1, 2], [3, 4]], "csv",
+#                                           file_name="export_data")
+
+@app.route('/upload', methods=['GET', 'POST'])
+def upload():
+    if request.method == 'POST':
+        # if request.form['submit_button'] == 'Do Something': #regular upload
+        #     ecxel_file = request.files['ecxel']
+        #     if not allowed_file(ecxel_file.filename):
+        #         print('file is not xlsx')
+                # return redirect(request.url)
+
+        if request.form['submit_button'] == 'export':
+                    dataframe = pd.read_sql('''SELECT * FROM "player_Average"''', con = db.engine)
+                    #create an output stream
+                    output = BytesIO()
+                    writer = pd.ExcelWriter(output, engine='xlsxwriter')
+                    #taken from the original question
+                    dataframe.to_excel(writer, startrow = 0, merge_cells = False, sheet_name = "Sheet_1")                
+                    workbook = writer.book
+                    worksheet = writer.sheets["Sheet_1"]
+                    format = workbook.add_format()
+                    format.set_bg_color('#eeeeee')
+                    worksheet.set_column(0,9,28)
+                    #the writer has done its job
+                    writer.close()
+                    #go back to the beginning of the stream
+                    output.seek(0)
+                    #finally return the file
+                    return send_file(output, attachment_filename="testing.xlsx", as_attachment=True)
+
+                
+    return render_template("upload.html")
+
+@app.route('/parameters5', methods=['GET', 'POST'])
+def parameters():
+
+    if request.method == 'POST':
+        if request.form['submit_button'] == 'show_5parameters':
+            parameters_1 = request.form["parameters_1"]
+            print(parameters_1)
+            parameters_2 = request.form["parameters_2"]
+            parameters_3 = request.form["parameters_3"]
+            parameters_4 = request.form["parameters_4"]
+            parameters_5 = request.form["parameters_5"]
+            player_1 = request.form["player_1"]
+            player_2 = request.form["player_2"]
+            player_3 = request.form["player_3"]
+            player_4 = request.form["player_4"]
+            player_5 = request.form["player_5"]
+
+            dataframe = pd.read_sql('''SELECT * FROM "player_Average"''', con = db.engine)
+            player_Name_options_list = dataframe['players_name'].tolist()
+            tabel_parameters = dataframe.columns.values.tolist()
+
+            print(parameters_1)
+            print(parameters_2)
+            print(player_1,player_2,player_3)
+
+            # tabel_of_firest_parameter = dataframe[(dataframe['players_name']==player_1)]
+
+            tabel_of_firest_parameter = dataframe[(dataframe['players_name']==player_1) | (dataframe['players_name']==player_2)| (dataframe['players_name']==player_3)| (dataframe['players_name']==player_4)| (dataframe['players_name']==player_5)]
+            tabel_of_firest_parameter = tabel_of_firest_parameter[["players_name", parameters_1, parameters_2, parameters_3, parameters_4, parameters_5]]
+            print(tabel_of_firest_parameter)
+            # tabel_of_firest_parameter['ratio_A/B'] = tabel_of_firest_parameter[parameters_1]/tabel_of_firest_parameter[parameters_2]
+            dan_1=tabel_of_firest_parameter.columns.values.tolist()
+            dan_2=tabel_of_firest_parameter.iloc[0].tolist()
+            dan_3=tabel_of_firest_parameter.iloc[1].tolist()
+            dan_4=tabel_of_firest_parameter.iloc[2].tolist()
+            dan_5=tabel_of_firest_parameter.iloc[3].tolist()
+            dan_6=tabel_of_firest_parameter.iloc[4].tolist()
+
+            print(dan_1)
+            print(dan_2)
+            print(dan_3)
+            print(dan_4)
+            tabel_of_firest_parameter = tabel_of_firest_parameter.to_html()
+
+
+            return render_template('parameters5.html',dataframe=tabel_of_firest_parameter, tabel_parameters=tabel_parameters,player_Name_options_list=player_Name_options_list,dan_1=dan_1,dan_2=dan_2,dan_3=dan_3,dan_4=dan_4,dan_5=dan_5,dan_6=dan_6)
+            # return redirect(request.url)
 
     dataframe = pd.read_sql('''SELECT * FROM "player_Average"''', con = db.engine)
     player_Name_options_list = dataframe['players_name'].tolist()
     tabel_parameters = dataframe.columns.values.tolist()
     dataframe = dataframe.to_html()
 
-    # tabel_of_firest_parameter = dataframe[(dataframe['players_name']=="Ivan Nasberg") | (dataframe['players_name']=="Herolind Shala")]
-    # tabel_of_firest_parameter = tabel_of_firest_parameter[["players_name", 'Dribbles', 'Tackles']]
-    # print(tabel_of_firest_parameter.to_numpy())
-    # print(tabel_parameters)
-    # print(player_Name_options_list)
-    # tabel_of_firest_parameter = tabel_of_firest_parameter.to_html()
+    return render_template("parameters5.html",dataframe=dataframe, tabel_parameters=tabel_parameters,player_Name_options_list=player_Name_options_list)
 
-    return render_template('index.html',dataframe=dataframe, tabel_parameters=tabel_parameters,player_Name_options_list=player_Name_options_list)
 
-# @app.route("/export", methods=['GET'])
-# def export_records():
-#     return excel.make_response_from_array([[1, 2], [3, 4]], "csv",
-#                                           file_name="export_data")
+@app.route('/scatter', methods=['GET', 'POST'])
+def scatterpage():
+
+    if request.method == 'POST':
+        if request.form['submit_button'] == 'show_scatter':
+            parameters_1 = request.form["parameters_1"]
+            parameters_2 = request.form["parameters_2"]
+            player_1 = request.form["player_1"]
+            player_2 = request.form["player_2"]
+            player_3 = request.form["player_3"]
+            player_4 = request.form["player_4"]
+            player_5 = request.form["player_5"]
+            player_6 = request.form["player_6"]
+            player_7 = request.form["player_7"]
+            player_8 = request.form["player_8"]
+
+            dataframe = pd.read_sql('''SELECT * FROM "player_Average"''', con = db.engine)
+            player_Name_options_list = dataframe['players_name'].tolist()
+            tabel_parameters = dataframe.columns.values.tolist()
+
+            # tabel_of_firest_parameter = dataframe[(dataframe['players_name']==player_1)]
+
+            tabel_of_firest_parameter = dataframe[(dataframe['players_name']==player_1) | (dataframe['players_name']==player_2)| (dataframe['players_name']==player_3)| (dataframe['players_name']==player_4)| (dataframe['players_name']==player_5)| (dataframe['players_name']==player_6)| (dataframe['players_name']==player_7)| (dataframe['players_name']==player_8)]
+            tabel_of_firest_parameter = tabel_of_firest_parameter[["players_name", parameters_1, parameters_2]]
+            print(tabel_of_firest_parameter)
+            # tabel_of_firest_parameter['ratio_A/B'] = tabel_of_firest_parameter[parameters_1]/tabel_of_firest_parameter[parameters_2]
+            dan_1=tabel_of_firest_parameter.columns.values.tolist()
+            dan_2=tabel_of_firest_parameter.iloc[0].tolist()
+            dan_3=tabel_of_firest_parameter.iloc[1].tolist()
+            dan_4=tabel_of_firest_parameter.iloc[2].tolist()
+            dan_5=tabel_of_firest_parameter.iloc[3].tolist()
+            dan_6=tabel_of_firest_parameter.iloc[4].tolist()
+
+            print(dan_1)
+            print(dan_2)
+            print(dan_3)
+            print(dan_4)
+            tabel_of_firest_parameter = tabel_of_firest_parameter.to_html()
+
+
+            return render_template('scatter.html',dataframe=tabel_of_firest_parameter, tabel_parameters=tabel_parameters,player_Name_options_list=player_Name_options_list,dan_1=dan_1,dan_2=dan_2,dan_3=dan_3,dan_4=dan_4,dan_5=dan_5,dan_6=dan_6)
+            
+    
+    dataframe = pd.read_sql('''SELECT * FROM "player_Average"''', con = db.engine)
+    player_Name_options_list = dataframe['players_name'].tolist()
+    tabel_parameters = dataframe.columns.values.tolist()
+    dataframe = dataframe.to_html()
+
+    return render_template("scatter.html",dataframe=dataframe, tabel_parameters=tabel_parameters,player_Name_options_list=player_Name_options_list)
+
