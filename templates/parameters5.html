@@ -1,0 +1,113 @@
+{% extends "base.html"  %}
+
+{% block content %}
+
+
+
+<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+<script type="text/javascript">
+  google.charts.load('current', {'packages':['bar']});
+  google.charts.setOnLoadCallback(drawChart);
+
+  function drawChart() {
+    var data = google.visualization.arrayToDataTable([
+      {{dan_1| safe}},
+      {{dan_2| safe}},
+      {{dan_3| safe}},
+      {{dan_4| safe}},
+      {{dan_5| safe}},
+      {{dan_6| safe}},
+    ]);
+
+    var options = {
+      chart: {
+        title: 'Player performance',
+        subtitle: 'Comparison of parameters: 2020',
+      },
+      bars: 'horizontal' // Required for Material Bar Charts.
+    };
+
+    var chart = new google.charts.Bar(document.getElementById('barchart_material'));
+
+    chart.draw(data, google.charts.Bar.convertOptions(options));
+  }
+</script>
+
+
+
+    <h4>Can comper 5 players.</h4>
+
+
+<div>
+  <form action="/parameters5" method="POST" enctype="multipart/form-data">
+
+    
+    <label for="parameters">Please choose 5 different parameters </label>
+    <br>
+    <select id="parameters" name= parameters_1 method="GET" action="/parameters5">
+        {% for parameter in tabel_parameters %}
+        <option value= "{{parameter}}" SELECTED>{{parameter}}</option>
+        {% endfor %}
+    </select>
+    <select name= parameters_2 method="GET" action="/parameters5">
+        {% for parameter in tabel_parameters %}
+        <option value= "{{parameter}}" SELECTED>{{parameter}}</option>
+        {% endfor %}
+    </select>
+    <br>
+    <select name= parameters_3 method="GET" action="/parameters5">
+        {% for parameter in tabel_parameters %}
+        <option value= "{{parameter}}" SELECTED>{{parameter}}</option>
+        {% endfor %}
+    </select>
+    <select name= parameters_4 method="GET" action="/parameters5">
+        {% for parameter in tabel_parameters %}
+        <option value= "{{parameter}}" SELECTED>{{parameter}}</option>
+        {% endfor %}
+    </select>
+    <select name= parameters_5 method="GET" action="/parameters5">
+        {% for parameter in tabel_parameters %}
+        <option value= "{{parameter}}" SELECTED>{{parameter}}</option>
+        {% endfor %}
+    </select>
+    <br>
+    <label for="pleyers_names">Please choose 5 different players </label>
+    <br>
+    <select id=pleyers_names name= player_1 method="GET" action="/parameters5">
+        {% for player in player_Name_options_list %}
+        <option value= "{{player}}" SELECTED>{{player}}</option>
+        {% endfor %}
+    </select>
+    <select name= player_2 method="GET" action="/parameters5">
+        {% for player in player_Name_options_list %}
+        <option value= "{{player}}" SELECTED>{{player}}</option>
+        {% endfor %}
+    </select>
+    <select name= player_3 method="GET" action="/parameters5">
+        {% for player in player_Name_options_list %}
+        <option value= "{{player}}" SELECTED>{{player}}</option>
+        {% endfor %}
+    </select>
+    <br>
+    <select name= player_4 method="GET" action="/parameters5">
+        {% for player in player_Name_options_list %}
+        <option value= "{{player}}" SELECTED>{{player}}</option>
+        {% endfor %}
+    </select>
+    <select name= player_5 method="GET" action="/parameters5">
+        {% for player in player_Name_options_list %}
+        <option value= "{{player}}" SELECTED>{{player}}</option>
+        {% endfor %}
+    </select>
+    <br>
+
+    <button type="submit" name="submit_button" value="show_5parameters">6) show_parameters </button>
+
+  </form>
+</div>
+<div id="barchart_material" style="width: 900px; height: 500px;"></div>
+
+<p>{{dataframe | safe}}</p>
+
+
+{% endblock %}
