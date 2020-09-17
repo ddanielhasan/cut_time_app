@@ -1,20 +1,29 @@
 body {
+    background-image: url("/static/blankfile.jpg");
     background-color: lightblue;
     font-family: 'Georgia', sans-serif;
+    text-align: center;
   }
 
-#banner {
+/* #banner {
     background-image: url("/static/blankfile.jpg");
     background-size: cover;
     background-position: bottom center;
-    height: 700px;
+    height: 900px;
     width: 100%;
-  }
+  } */
 
-#banner .content h1 p {
+#banner .content h1, p {
     border: 3px solid white;
     position: relative;
     top: 50px;
-    width: 400px;
+    width: 350px;
     margin: 0 auto;
+}
+
+nav {
+    font-size: 20px;
+    font-weight: bold;
+    color: black;
+    background-color: rgba(18, 124, 18, 0.336);
 }
