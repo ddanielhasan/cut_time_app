@@ -6,7 +6,7 @@ body {
   }
 
 #banner .content h1, p {
-    border: 3px solid white;
+    border: 3px solid rgb(226, 227, 255);
     position: relative;
     top: 50px;
     width: 350px;
