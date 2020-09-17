@@ -1,20 +1,12 @@
 body {
     background-image: url("/static/blankfile.jpg");
-    background-color: lightblue;
+    background-color: rgb(180, 247, 171);
     font-family: 'Georgia', sans-serif;
     text-align: center;
   }
 
-/* #banner {
-    background-image: url("/static/blankfile.jpg");
-    background-size: cover;
-    background-position: bottom center;
-    height: 900px;
-    width: 100%;
-  } */
-
 #banner .content h1, p {
-    border: 3px solid white;
+    border: 3px solid rgb(226, 227, 255);
     position: relative;
     top: 50px;
     width: 350px;
