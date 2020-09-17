@@ -131,7 +131,6 @@ class Player(db.Model):
 
 db.create_all()
 
-list_of_players_names=[]
 
 def allowed_file(filename):
     if not "." in filename:
@@ -144,86 +143,8 @@ def allowed_file(filename):
 
 @app.route("/", methods=['GET', 'POST'])
 def home():
-    if request.method == 'POST':
-        if request.form['submit_button'] == 'Do Something': #regular upload
-            ecxel_file = request.files['ecxel']
-            if not allowed_file(ecxel_file.filename):
-                print('file is not xlsx')
-                return redirect(request.url)
-            else:
-                filename = secure_filename(ecxel_file.filename)
-                print(ecxel_file)
-                # ecxel_file.save(os.path.join(app.config['FILE_UPLOAD'], filename))
-                # print('file saved')
-                #printing the ecxel
-                new_df = pd.read_excel(ecxel_file)
-                print(new_df)
-                # print(new_df.shape)
-                # print(new_df.shape[0])
-                for rew in range(new_df.shape[0]):
-                    # print (new_df.iloc[rew])
-                    x=6
-                new_df.to_sql(name='player_Name', con=db.engine, if_exists='append',  index=False)
-                db.session.commit()
-
-                all_data = Player_Name.query.all()
-                print(all_data)
-                tabel=new_df.to_html()
-
-                dataframe = pd.read_sql('''SELECT * FROM "player_Name"''', con = db.engine)
-                dataframe = dataframe.to_html()
-                
-            return render_template('index.html',all_data=all_data , tabel=tabel, dataframe=dataframe)
-        elif request.form['submit_button'] == 'Upload to palyer tabel': #upload to data tabel
-            ecxel_file = request.files['ecxel']
-            if not allowed_file(ecxel_file.filename):
-                print('file is not xlsx')
-                return redirect(request.url)
-            else:
-                # filename = secure_filename(ecxel_file.filename)
-                # print(filename)
-                # print(ecxel_file)
-                # ecxel_file.save(os.path.join(app.config['FILE_UPLOAD'], filename))
-                # print('file saved')
-                #printing the ecxel
-                new_df = pd.read_excel(ecxel_file).copy()
-                print(ecxel_file.filename)
-                ext = ecxel_file.filename.rsplit('.')[0]
-                print(ext)
-                ext2 = ext.rsplit('_')[-1:]
-                print(ext2)
-                player_name= ' '.join(ext2)
-                print(player_name)
-                # new_df = pd.read_excel(new_file).copy()
-                to_drop = ['Date', 'Unnamed: 1','score','InStat Index']
-                new_df.drop(columns=to_drop, inplace=True)
-                new_df.insert(0,'players name', player_name, True)
-                # column_names= list(new_df.columns.values.tolist())
-                new_df.rename(columns={'players name':'players_name','Chances successful':'Chances_successful', "Chances, % of conversion":'Chances_present_of_conversion', 'Сhances created':'Сhances_created', 'Fouls suffered':'Fouls_suffered', 'Yellow cards':'Yellow_cards', 'Red cards':'Red_cards', 'Shots on target':'Shots_on_target','xG (Expected goals)':'Expected_goals', 'Accurate passes, %':'Accurate_passes_present', 'Key passes':'Key_passes', 'Key passes accuracy, %':'Key_passes_accuracy_present', 'Accurate crosses, %':'Accurate_crosses_present', 'Lost balls':'Lost_balls', "Lost balls in own half":"Lost_balls_in_own_half", 'Ball recoveries':'Ball_recoveries', "Ball recoveries in opponent's half":'Ball_recoveries_in_opponents_half', 'Challenges won, %':'Challenges_won_present', 'Defensive challenges':'Defensive_challenges', 'Challenges in defence won, %':'Challenges_in_defence_won_present', 'Attacking challenges':'Attacking_challenges', 'Challenges in attack / won, %':'Challenges_in_attack__won_present', 'Air challenges':'Air_challenges', 'Air challenges won, %':'Air_challenges_won_present', 'Successful dribbles, %':'Successful_dribbles_present', 'Tackles won, %':'Tackles_won_present', 'Ball interceptions':'Ball_interceptions', 'Free ball pick ups':'Free_ball_pick_ups'}, inplace=True)
-                def delete(item):
-                    if item == "-":
-                        item = 0
-                        return item
-                    elif '%' in str(item):
-                        return item[:item.find('%')]
-                    else:
-                        return item
-                new_df = new_df.applymap(delete)
-                              
-                print(new_df)
-
-                new_df.to_sql(name='players_data', con=db.engine, if_exists='append',  index=False)
-                db.session.commit()
-
-                all_data = Player.query.all()
-                tabel=new_df.to_html()
-
-                dataframe = pd.read_sql('''SELECT * FROM players_data''', con = db.engine)
-                dataframe = dataframe.to_html()
-                
-            return render_template('index.html',all_data=all_data , tabel=tabel, dataframe=dataframe)
-        
-        elif request.form['submit_button'] == 'Upload to player_Name tabel': #upload to player_Name tabel
+    if request.method == 'POST':        
+        if request.form['submit_button'] == 'Upload to player_Name tabel': #upload to player_Name tabel
             ecxel_file = request.files['ecxel']
             if not allowed_file(ecxel_file.filename):
                 print('file is not xlsx')
@@ -293,25 +214,6 @@ def home():
                 dataframe = dataframe.to_html()
 
             return render_template('index.html',all_data=all_data , tabel=tabel, dataframe=dataframe)
-
-        elif request.form['submit_button'] == 'export':
-                dataframe = pd.read_sql('''SELECT * FROM "player_Name"''', con = db.engine)
-                #create an output stream
-                output = BytesIO()
-                writer = pd.ExcelWriter(output, engine='xlsxwriter')
-                #taken from the original question
-                dataframe.to_excel(writer, startrow = 0, merge_cells = False, sheet_name = "Sheet_1")                
-                workbook = writer.book
-                worksheet = writer.sheets["Sheet_1"]
-                format = workbook.add_format()
-                format.set_bg_color('#eeeeee')
-                worksheet.set_column(0,9,28)
-                #the writer has done its job
-                writer.close()
-                #go back to the beginning of the stream
-                output.seek(0)
-                #finally return the file
-                return send_file(output, attachment_filename="testing.xlsx", as_attachment=True)
         
         elif request.form['submit_button'] == 'show_parameters':
             parameters_1 = request.form["parameters_1"]
@@ -324,32 +226,24 @@ def home():
             player_Name_options_list = dataframe['players_name'].tolist()
             tabel_parameters = dataframe.columns.values.tolist()
 
-            print(parameters_1)
-            print(parameters_2)
-            print(player_1,player_2,player_3)
-
-            # tabel_of_firest_parameter = dataframe[(dataframe['players_name']==player_1)]
 
             tabel_of_firest_parameter = dataframe[(dataframe['players_name']==player_1) | (dataframe['players_name']==player_2)| (dataframe['players_name']==player_3)]
             tabel_of_firest_parameter = tabel_of_firest_parameter[["players_name", parameters_1, parameters_2]]
-            print(tabel_of_firest_parameter)
+            tabel_of_firest_parameter = tabel_of_firest_parameter.fillna(0)
             tabel_of_firest_parameter['ratio_A/B'] = tabel_of_firest_parameter[parameters_1]/tabel_of_firest_parameter[parameters_2]
+            # print(tabel_of_firest_parameter)
+            # tabel_of_firest_parameter = tabel_of_firest_parameter.replace("inf",0)
+            # print(tabel_of_firest_parameter)
             dan_1=tabel_of_firest_parameter.columns.values.tolist()
             dan_2=tabel_of_firest_parameter.iloc[0].tolist()
             dan_3=tabel_of_firest_parameter.iloc[1].tolist()
             dan_4=tabel_of_firest_parameter.iloc[2].tolist()
-            print(dan_1)
-            print(dan_2)
-            print(dan_3)
-            print(dan_4)
             tabel_of_firest_parameter = tabel_of_firest_parameter.to_html()
 
 
             return render_template('index.html',dataframe=tabel_of_firest_parameter, tabel_parameters=tabel_parameters,player_Name_options_list=player_Name_options_list,dan_1=dan_1,dan_2=dan_2,dan_3=dan_3,dan_4=dan_4)
             # return redirect(request.url)
 
-
-    #regualr
     dataframe = pd.read_sql('''SELECT * FROM "player_Average"''', con = db.engine)
     player_Name_options_list = dataframe['players_name'].tolist()
     tabel_parameters = dataframe.columns.values.tolist()
@@ -366,20 +260,9 @@ def home():
 
     return render_template('index.html',dataframe=dataframe, tabel_parameters=tabel_parameters,player_Name_options_list=player_Name_options_list, dan_1=dan_1,dan_2=dan_2,dan_3=dan_3,dan_4=dan_4)
 
-# @app.route("/export", methods=['GET'])
-# def export_records():
-#     return excel.make_response_from_array([[1, 2], [3, 4]], "csv",
-#                                           file_name="export_data")
-
 @app.route('/upload', methods=['GET', 'POST'])
 def upload():
     if request.method == 'POST':
-        # if request.form['submit_button'] == 'Do Something': #regular upload
-        #     ecxel_file = request.files['ecxel']
-        #     if not allowed_file(ecxel_file.filename):
-        #         print('file is not xlsx')
-                # return redirect(request.url)
-
         if request.form['submit_button'] == 'export':
                     dataframe = pd.read_sql('''SELECT * FROM "player_Average"''', con = db.engine)
                     #create an output stream
@@ -399,7 +282,6 @@ def upload():
                     #finally return the file
                     return send_file(output, attachment_filename="testing.xlsx", as_attachment=True)
 
-                
     return render_template("upload.html")
 
 @app.route('/parameters5', methods=['GET', 'POST'])
@@ -423,16 +305,10 @@ def parameters():
             player_Name_options_list = dataframe['players_name'].tolist()
             tabel_parameters = dataframe.columns.values.tolist()
 
-            print(parameters_1)
-            print(parameters_2)
-            print(player_1,player_2,player_3)
-
-            # tabel_of_firest_parameter = dataframe[(dataframe['players_name']==player_1)]
-
             tabel_of_firest_parameter = dataframe[(dataframe['players_name']==player_1) | (dataframe['players_name']==player_2)| (dataframe['players_name']==player_3)| (dataframe['players_name']==player_4)| (dataframe['players_name']==player_5)]
             tabel_of_firest_parameter = tabel_of_firest_parameter[["players_name", parameters_1, parameters_2, parameters_3, parameters_4, parameters_5]]
+            tabel_of_firest_parameter = tabel_of_firest_parameter.fillna(0)
             print(tabel_of_firest_parameter)
-            # tabel_of_firest_parameter['ratio_A/B'] = tabel_of_firest_parameter[parameters_1]/tabel_of_firest_parameter[parameters_2]
             dan_1=tabel_of_firest_parameter.columns.values.tolist()
             dan_2=tabel_of_firest_parameter.iloc[0].tolist()
             dan_3=tabel_of_firest_parameter.iloc[1].tolist()
@@ -440,10 +316,6 @@ def parameters():
             dan_5=tabel_of_firest_parameter.iloc[3].tolist()
             dan_6=tabel_of_firest_parameter.iloc[4].tolist()
 
-            print(dan_1)
-            print(dan_2)
-            print(dan_3)
-            print(dan_4)
             tabel_of_firest_parameter = tabel_of_firest_parameter.to_html()
 
 
@@ -478,12 +350,10 @@ def scatterpage():
             player_Name_options_list = dataframe['players_name'].tolist()
             tabel_parameters = dataframe.columns.values.tolist()
 
-            # tabel_of_firest_parameter = dataframe[(dataframe['players_name']==player_1)]
-
             tabel_of_firest_parameter = dataframe[(dataframe['players_name']==player_1) | (dataframe['players_name']==player_2)| (dataframe['players_name']==player_3)| (dataframe['players_name']==player_4)| (dataframe['players_name']==player_5)| (dataframe['players_name']==player_6)| (dataframe['players_name']==player_7)| (dataframe['players_name']==player_8)]
             tabel_of_firest_parameter = tabel_of_firest_parameter[["players_name", parameters_1, parameters_2]]
+            tabel_of_firest_parameter = tabel_of_firest_parameter.fillna(0)
             print(tabel_of_firest_parameter)
-            # tabel_of_firest_parameter['ratio_A/B'] = tabel_of_firest_parameter[parameters_1]/tabel_of_firest_parameter[parameters_2]
             dan_1=tabel_of_firest_parameter.columns.values.tolist()
             dan_2=tabel_of_firest_parameter.iloc[0].tolist()
             dan_3=tabel_of_firest_parameter.iloc[1].tolist()
@@ -508,3 +378,6 @@ def scatterpage():
 
     return render_template("scatter.html",dataframe=dataframe, tabel_parameters=tabel_parameters,player_Name_options_list=player_Name_options_list)
 
+@app.route('/testing', methods=['GET', 'POST'])
+def testing():
+    return render_template("testing.html")
