@@ -1,8 +1,8 @@
 body {
-    background-image: url("/static/blankfile.jpg");
+    /* background-image: url("/static/blankfile.jpg"); */
     background-color: rgb(180, 247, 171);
     font-family: 'Georgia', sans-serif;
-    text-align: center;
+    /* text-align: center; */
   }
 
 #banner .content h1, p {

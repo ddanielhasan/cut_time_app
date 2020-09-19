@@ -345,14 +345,27 @@ def scatterpage():
             player_6 = request.form["player_6"]
             player_7 = request.form["player_7"]
             player_8 = request.form["player_8"]
+            player_9 = request.form["player_9"]
+            player_10 = request.form["player_10"]
+            player_11 = request.form["player_11"]
+            player_12 = request.form["player_12"]
+            player_13 = request.form["player_13"]
+            player_14 = request.form["player_14"]
+            player_15 = request.form["player_15"]
+            player_16 = request.form["player_16"]
+            player_17 = request.form["player_17"]
+            player_18 = request.form["player_18"]
+            player_19 = request.form["player_19"]
+            player_20 = request.form["player_20"]
 
             dataframe = pd.read_sql('''SELECT * FROM "player_Average"''', con = db.engine)
             player_Name_options_list = dataframe['players_name'].tolist()
             tabel_parameters = dataframe.columns.values.tolist()
 
-            tabel_of_firest_parameter = dataframe[(dataframe['players_name']==player_1) | (dataframe['players_name']==player_2)| (dataframe['players_name']==player_3)| (dataframe['players_name']==player_4)| (dataframe['players_name']==player_5)| (dataframe['players_name']==player_6)| (dataframe['players_name']==player_7)| (dataframe['players_name']==player_8)]
+            tabel_of_firest_parameter = dataframe[(dataframe['players_name']==player_1) | (dataframe['players_name']==player_2)| (dataframe['players_name']==player_3)| (dataframe['players_name']==player_4)| (dataframe['players_name']==player_5)| (dataframe['players_name']==player_6)| (dataframe['players_name']==player_7)| (dataframe['players_name']==player_8)|(dataframe['players_name']==player_9) | (dataframe['players_name']==player_10)| (dataframe['players_name']==player_11)| (dataframe['players_name']==player_12)| (dataframe['players_name']==player_13)| (dataframe['players_name']==player_14)| (dataframe['players_name']==player_15)| (dataframe['players_name']==player_16)| (dataframe['players_name']==player_17)| (dataframe['players_name']==player_18)| (dataframe['players_name']==player_19)| (dataframe['players_name']==player_20)]
             tabel_of_firest_parameter = tabel_of_firest_parameter[["players_name", parameters_1, parameters_2]]
             tabel_of_firest_parameter = tabel_of_firest_parameter.fillna(0)
+            tabel_of_firest_parameter = tabel_of_firest_parameter [[parameters_1 ,parameters_2,"players_name"]]
             print(tabel_of_firest_parameter)
             dan_1=tabel_of_firest_parameter.columns.values.tolist()
             dan_2=tabel_of_firest_parameter.iloc[0].tolist()
@@ -360,15 +373,31 @@ def scatterpage():
             dan_4=tabel_of_firest_parameter.iloc[2].tolist()
             dan_5=tabel_of_firest_parameter.iloc[3].tolist()
             dan_6=tabel_of_firest_parameter.iloc[4].tolist()
+            dan_7=tabel_of_firest_parameter.iloc[5].tolist()
+            dan_8=tabel_of_firest_parameter.iloc[6].tolist()
+            dan_9=tabel_of_firest_parameter.iloc[7].tolist()
+            dan_10=tabel_of_firest_parameter.iloc[8].tolist()
+            dan_11=tabel_of_firest_parameter.iloc[9].tolist()
+            dan_12=tabel_of_firest_parameter.iloc[10].tolist()
+            dan_13=tabel_of_firest_parameter.iloc[11].tolist()
+            dan_14=tabel_of_firest_parameter.iloc[12].tolist()
+            dan_15=tabel_of_firest_parameter.iloc[13].tolist()
+            dan_16=tabel_of_firest_parameter.iloc[14].tolist()
+            dan_17=tabel_of_firest_parameter.iloc[15].tolist()
+            dan_18=tabel_of_firest_parameter.iloc[16].tolist()
+            dan_19=tabel_of_firest_parameter.iloc[17].tolist()
+            dan_20=tabel_of_firest_parameter.iloc[18].tolist()
+            dan_21=tabel_of_firest_parameter.iloc[19].tolist()
 
-            print(dan_1)
-            print(dan_2)
-            print(dan_3)
-            print(dan_4)
+
+            # print(parameters_1)
+            # print(dan_2)
+            # print(dan_3)
+            # print(dan_4)
             tabel_of_firest_parameter = tabel_of_firest_parameter.to_html()
 
 
-            return render_template('scatter.html',dataframe=tabel_of_firest_parameter, tabel_parameters=tabel_parameters,player_Name_options_list=player_Name_options_list,dan_1=dan_1,dan_2=dan_2,dan_3=dan_3,dan_4=dan_4,dan_5=dan_5,dan_6=dan_6)
+            return render_template('scatter.html',dataframe=tabel_of_firest_parameter, tabel_parameters=tabel_parameters,player_Name_options_list=player_Name_options_list, dan_2=dan_2, dan_3=dan_3, dan_4=dan_4, dan_5=dan_5, dan_6=dan_6, dan_7=dan_7, dan_8=dan_8, dan_9=dan_9, dan_10=dan_10, dan_11=dan_11, dan_12=dan_12, dan_13=dan_13, dan_14=dan_14, dan_15=dan_15, dan_16=dan_16, dan_17=dan_17, dan_18=dan_18, dan_19=dan_19, dan_20=dan_20, dan_21=dan_21)
             
     
     dataframe = pd.read_sql('''SELECT * FROM "player_Average"''', con = db.engine)
