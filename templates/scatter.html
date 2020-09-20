@@ -49,6 +49,7 @@
 <form action="/scatter" method="POST" enctype="multipart/form-data">
 
     <label for="parameters">Please choose 2 parameters </label>
+    <br>
         <select id="parameters" name= parameters_1 method="GET" action="/">
             {% for parameter in tabel_parameters %}
             <option value= "{{parameter}}" SELECTED>{{parameter}}</option>
@@ -61,7 +62,8 @@
         </select>
         <br>
 
-    <label for="scatter">Please choose 8 different players </label>
+    <label for="scatter">Please choose 20 different players </label>
+    <br>
         <select id=scatter name= player_1 method="GET" action="/scatter">
             {% for player in player_Name_options_list %}
             <option value= "{{player}}" SELECTED>{{player}}</option>
@@ -77,7 +79,6 @@
             <option value= "{{player}}" SELECTED>{{player}}</option>
             {% endfor %}
         </select>
-        <br>
         <select name= player_4 method="GET" action="/scatter">
             {% for player in player_Name_options_list %}
             <option value= "{{player}}" SELECTED>{{player}}</option>
@@ -88,12 +89,12 @@
             <option value= "{{player}}" SELECTED>{{player}}</option>
             {% endfor %}
         </select>
+        <br>
         <select name= player_6 method="GET" action="/scatter">
             {% for player in player_Name_options_list %}
             <option value= "{{player}}" SELECTED>{{player}}</option>
             {% endfor %}
         </select>
-        <br>
         <select name= player_7 method="GET" action="/scatter">
             {% for player in player_Name_options_list %}
             <option value= "{{player}}" SELECTED>{{player}}</option>
@@ -166,6 +167,7 @@
             <option value= "{{player}}" SELECTED>{{player}}</option>
             {% endfor %}
         </select>
+        <br>
         
     <button type="submit" name="submit_button" value="show_scatter">show scatter </button>
 </form>

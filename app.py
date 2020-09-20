@@ -308,7 +308,7 @@ def parameters():
             tabel_of_firest_parameter = dataframe[(dataframe['players_name']==player_1) | (dataframe['players_name']==player_2)| (dataframe['players_name']==player_3)| (dataframe['players_name']==player_4)| (dataframe['players_name']==player_5)]
             tabel_of_firest_parameter = tabel_of_firest_parameter[["players_name", parameters_1, parameters_2, parameters_3, parameters_4, parameters_5]]
             tabel_of_firest_parameter = tabel_of_firest_parameter.fillna(0)
-            print(tabel_of_firest_parameter)
+            # print(tabel_of_firest_parameter)
             dan_1=tabel_of_firest_parameter.columns.values.tolist()
             dan_2=tabel_of_firest_parameter.iloc[0].tolist()
             dan_3=tabel_of_firest_parameter.iloc[1].tolist()
@@ -325,9 +325,20 @@ def parameters():
     dataframe = pd.read_sql('''SELECT * FROM "player_Average"''', con = db.engine)
     player_Name_options_list = dataframe['players_name'].tolist()
     tabel_parameters = dataframe.columns.values.tolist()
-    dataframe = dataframe.to_html()
+    # dataframe = dataframe.to_html()
 
-    return render_template("parameters5.html",dataframe=dataframe, tabel_parameters=tabel_parameters,player_Name_options_list=player_Name_options_list)
+    tabel_of_firest_parameter = dataframe[(dataframe['players_name']=="Eden Shamir") | (dataframe['players_name']=="N'Golo Kante") | (dataframe['players_name']=="Franck Bilal Ribery") | (dataframe['players_name']=="Alberto Moreno") | (dataframe['players_name']=="Moise Kean")]
+    tabel_of_firest_parameter = tabel_of_firest_parameter[["players_name", "Passes", "Attacking_challenges", "Dribbles", "Accurate_passes_present", "Key_passes_accuracy_present"]]
+    tabel_of_firest_parameter = tabel_of_firest_parameter.fillna(0)
+    dan_1=tabel_of_firest_parameter.columns.values.tolist()
+    dan_2=tabel_of_firest_parameter.iloc[0].tolist()
+    dan_3=tabel_of_firest_parameter.iloc[1].tolist()
+    dan_4=tabel_of_firest_parameter.iloc[2].tolist()
+    dan_5=tabel_of_firest_parameter.iloc[3].tolist()
+    dan_6=tabel_of_firest_parameter.iloc[4].tolist()
+    dataframe = tabel_of_firest_parameter.to_html()
+
+    return render_template("parameters5.html",dataframe=dataframe, tabel_parameters=tabel_parameters,player_Name_options_list=player_Name_options_list,dan_1=dan_1,dan_2=dan_2,dan_3=dan_3,dan_4=dan_4,dan_5=dan_5,dan_6=dan_6)
 
 
 @app.route('/scatter', methods=['GET', 'POST'])
@@ -366,7 +377,7 @@ def scatterpage():
             tabel_of_firest_parameter = tabel_of_firest_parameter[["players_name", parameters_1, parameters_2]]
             tabel_of_firest_parameter = tabel_of_firest_parameter.fillna(0)
             tabel_of_firest_parameter = tabel_of_firest_parameter [[parameters_1 ,parameters_2,"players_name"]]
-            print(tabel_of_firest_parameter)
+            # print(tabel_of_firest_parameter)
             dan_1=tabel_of_firest_parameter.columns.values.tolist()
             dan_2=tabel_of_firest_parameter.iloc[0].tolist()
             dan_3=tabel_of_firest_parameter.iloc[1].tolist()
