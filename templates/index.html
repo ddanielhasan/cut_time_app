@@ -59,21 +59,22 @@
         <button type="submit" name="submit_button" value="Upload to palyer tabel">4)Upload to player tabel </button>
         <br>
         -->
-        <button type="submit" name="submit_button" value="Upload to player_Name tabel">5)Upload to all three tabels </button>
+        <button type="submit" name="submit_button" value="Upload to player_Name tabel">Upload the player file</button>
         <br>
-        <label for="parameters">Please choose 2 parameters </label>
+        <label for="parameters">Please choose 2 parameters:   A-> </label>
         <select id="parameters" name= parameters_1 method="GET" action="/">
             {% for parameter in tabel_parameters %}
             <option value= "{{parameter}}" SELECTED>{{parameter}}</option>
             {% endfor %}
         </select>
-        <select name= parameters_2 method="GET" action="/">
+        <label for="parameter_2">B-></label>
+        <select id="parameter_2" name= parameters_2 method="GET" action="/">
             {% for parameter in tabel_parameters %}
             <option value= "{{parameter}}" SELECTED>{{parameter}}</option>
             {% endfor %}
         </select>
         <br>
-        <label for="pleyers_names">Please choose 3 players </label>
+        <label for="pleyers_names">Please choose 3 players: </label>
         <select id=pleyers_names name= player_1 method="GET" action="/">
             {% for player in player_Name_options_list %}
             <option value= "{{player}}" SELECTED>{{player}}</option>

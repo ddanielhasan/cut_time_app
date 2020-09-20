@@ -400,11 +400,6 @@ def scatterpage():
             dan_20=tabel_of_firest_parameter.iloc[18].tolist()
             dan_21=tabel_of_firest_parameter.iloc[19].tolist()
 
-
-            # print(parameters_1)
-            # print(dan_2)
-            # print(dan_3)
-            # print(dan_4)
             tabel_of_firest_parameter = tabel_of_firest_parameter.to_html()
 
 
@@ -414,7 +409,7 @@ def scatterpage():
     dataframe = pd.read_sql('''SELECT * FROM "player_Average"''', con = db.engine)
     player_Name_options_list = dataframe['players_name'].tolist()
     tabel_parameters = dataframe.columns.values.tolist()
-    dataframe = dataframe.to_html()
+    dataframe = dataframe.to_html() 
 
     return render_template("scatter.html",dataframe=dataframe, tabel_parameters=tabel_parameters,player_Name_options_list=player_Name_options_list)
 
