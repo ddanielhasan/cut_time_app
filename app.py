@@ -19,14 +19,13 @@ else:
     app.config['SQLALCHEMY_DATABASE_URI'] = 'postgres://hjhsprtbfnahgt:4a3ac5df6d9e3db852691fcc734f659e740a896fa9ccd27e3ca9b0e1d80c5922@ec2-52-72-34-184.compute-1.amazonaws.com:5432/d4cs2h729n3io0'
 
 app.config['FILE_UPLOAD']= 'C:/Users/Top/Documents/liad2/static/uploads'
-app.config['ALLOWED_FILE_EXTENSIONS'] = ['XLSX']
+app.config['ALLOWED_FILE_EXTENSIONS'] = ['XLSX','XLS']
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False 
 
 db = SQLAlchemy(app)
 
 class Player_Name(db.Model):
     __tablename__ = "player_Name"
-    # __tablename__ = "Try_1"
 
     id = db.Column(db.Integer, primary_key = True)
     player_name = db.Column(db.String, index = True)
@@ -42,44 +41,44 @@ class Player_Average(db.Model):
     players_name = db.Column(db.String, index = True)
     Opponent = db.Column(db.String, index = True)
     Position = db.Column(db.String, nullable=True, index = True)
-    Goals = db.Column(db.Integer, nullable=True, index = True)
-    Assists = db.Column(db.Integer, nullable=True, index = True)
-    Chances = db.Column(db.Integer, nullable=True, index = True)
-    Chances_successful = db.Column(db.Integer, nullable=True, index = True)
-    Chances_present_of_conversion = db.Column(db.Integer, nullable=True, index = True)
-    Сhances_created = db.Column(db.Integer, nullable=True, index = True)
-    Fouls = db.Column(db.Integer, nullable=True, index = True)
-    Fouls_suffered = db.Column(db.Integer, nullable=True, index = True)
-    Yellow_cards = db.Column(db.Integer, nullable=True, index = True)
-    Red_cards = db.Column(db.Integer, nullable=True, index = True)
-    Offsides = db.Column(db.Integer, nullable=True, index = True)
-    Shots = db.Column(db.Integer, nullable=True, index = True)
-    Shots_on_target = db.Column(db.Integer, nullable=True, index = True)
-    Expected_goals = db.Column(db.Integer, nullable=True, index = True)
-    Passes = db.Column(db.Integer, nullable=True, index = True)
-    Accurate_passes_present = db.Column(db.Integer, nullable=True, index = True)
-    Key_passes = db.Column(db.Integer, nullable=True, index = True)
-    Key_passes_accuracy_present = db.Column(db.Integer, nullable=True, index = True)
-    Crosses = db.Column(db.Integer, nullable=True, index = True)
-    Accurate_crosses_present = db.Column(db.Integer, nullable=True, index = True)
-    Lost_balls = db.Column(db.Integer, nullable=True, index = True)
-    Lost_balls_in_own_half = db.Column(db.Integer, nullable=True, index = True)
-    Ball_recoveries = db.Column(db.Integer, nullable=True, index = True)
-    Ball_recoveries_in_opponents_half = db.Column(db.Integer, nullable=True, index = True)
-    Challenges = db.Column(db.Integer, nullable=True, index = True)
-    Challenges_won_present = db.Column(db.Integer, nullable=True, index = True)
-    Defensive_challenges = db.Column(db.Integer, nullable=True, index = True)
-    Challenges_in_defence_won_present = db.Column(db.Integer, nullable=True, index = True)
-    Attacking_challenges = db.Column(db.Integer, nullable=True, index = True)
-    Challenges_in_attack__won_present = db.Column(db.Integer, nullable=True, index = True)
-    Air_challenges = db.Column(db.Integer, nullable=True, index = True)
-    Air_challenges_won_present = db.Column(db.Integer, nullable=True, index = True)
-    Dribbles = db.Column(db.Integer, nullable=True, index = True)
-    Successful_dribbles_present = db.Column(db.Integer, nullable=True, index = True)
-    Tackles = db.Column(db.Integer, nullable=True, index = True)
-    Tackles_won_present = db.Column(db.Integer, nullable=True, index = True)
-    Ball_interceptions = db.Column(db.Integer, nullable=True, index = True)
-    Free_ball_pick_ups = db.Column(db.Integer, nullable=True, index = True)
+    Goals = db.Column(db.Float, nullable=True, index = True)
+    Assists = db.Column(db.Float, nullable=True, index = True)
+    Chances = db.Column(db.Float, nullable=True, index = True)
+    Chances_successful = db.Column(db.Float, nullable=True, index = True)
+    Chances_present_of_conversion = db.Column(db.Float, nullable=True, index = True)
+    Сhances_created = db.Column(db.Float, nullable=True, index = True)
+    Fouls = db.Column(db.Float, nullable=True, index = True)
+    Fouls_suffered = db.Column(db.Float, nullable=True, index = True)
+    Yellow_cards = db.Column(db.Float, nullable=True, index = True)
+    Red_cards = db.Column(db.Float, nullable=True, index = True)
+    Offsides = db.Column(db.Float, nullable=True, index = True)
+    Shots = db.Column(db.Float, nullable=True, index = True)
+    Shots_on_target = db.Column(db.Float, nullable=True, index = True)
+    Expected_goals = db.Column(db.Float, nullable=True, index = True)
+    Passes = db.Column(db.Float, nullable=True, index = True)
+    Accurate_passes_present = db.Column(db.Float, nullable=True, index = True)
+    Key_passes = db.Column(db.Float, nullable=True, index = True)
+    Key_passes_accuracy_present = db.Column(db.Float, nullable=True, index = True)
+    Crosses = db.Column(db.Float, nullable=True, index = True)
+    Accurate_crosses_present = db.Column(db.Float, nullable=True, index = True)
+    Lost_balls = db.Column(db.Float, nullable=True, index = True)
+    Lost_balls_in_own_half = db.Column(db.Float, nullable=True, index = True)
+    Ball_recoveries = db.Column(db.Float, nullable=True, index = True)
+    Ball_recoveries_in_opponents_half = db.Column(db.Float, nullable=True, index = True)
+    Challenges = db.Column(db.Float, nullable=True, index = True)
+    Challenges_won_present = db.Column(db.Float, nullable=True, index = True)
+    Defensive_challenges = db.Column(db.Float, nullable=True, index = True)
+    Challenges_in_defence_won_present = db.Column(db.Float, nullable=True, index = True)
+    Attacking_challenges = db.Column(db.Float, nullable=True, index = True)
+    Challenges_in_attack__won_present = db.Column(db.Float, nullable=True, index = True)
+    Air_challenges = db.Column(db.Float, nullable=True, index = True)
+    Air_challenges_won_present = db.Column(db.Float, nullable=True, index = True)
+    Dribbles = db.Column(db.Float, nullable=True, index = True)
+    Successful_dribbles_present = db.Column(db.Float, nullable=True, index = True)
+    Tackles = db.Column(db.Float, nullable=True, index = True)
+    Tackles_won_present = db.Column(db.Float, nullable=True, index = True)
+    Ball_interceptions = db.Column(db.Float, nullable=True, index = True)
+    Free_ball_pick_ups = db.Column(db.Float, nullable=True, index = True)
 
 
 class Player(db.Model):
@@ -90,44 +89,44 @@ class Player(db.Model):
     players_name = db.Column(db.String, index = True)
     Opponent = db.Column(db.String, index = True)
     Position = db.Column(db.String, nullable=True, index = True)
-    Goals = db.Column(db.Integer, nullable=True, index = True)
-    Assists = db.Column(db.Integer, nullable=True, index = True)
-    Chances = db.Column(db.Integer, nullable=True, index = True)
-    Chances_successful = db.Column(db.Integer, nullable=True, index = True)
-    Chances_present_of_conversion = db.Column(db.Integer, nullable=True, index = True)
-    Сhances_created = db.Column(db.Integer, nullable=True, index = True)
-    Fouls = db.Column(db.Integer, nullable=True, index = True)
-    Fouls_suffered = db.Column(db.Integer, nullable=True, index = True)
-    Yellow_cards = db.Column(db.Integer, nullable=True, index = True)
-    Red_cards = db.Column(db.Integer, nullable=True, index = True)
-    Offsides = db.Column(db.Integer, nullable=True, index = True)
-    Shots = db.Column(db.Integer, nullable=True, index = True)
-    Shots_on_target = db.Column(db.Integer, nullable=True, index = True)
-    Expected_goals = db.Column(db.Integer, nullable=True, index = True)
-    Passes = db.Column(db.Integer, nullable=True, index = True)
-    Accurate_passes_present = db.Column(db.Integer, nullable=True, index = True)
-    Key_passes = db.Column(db.Integer, nullable=True, index = True)
-    Key_passes_accuracy_present = db.Column(db.Integer, nullable=True, index = True)
-    Crosses = db.Column(db.Integer, nullable=True, index = True)
-    Accurate_crosses_present = db.Column(db.Integer, nullable=True, index = True)
-    Lost_balls = db.Column(db.Integer, nullable=True, index = True)
-    Lost_balls_in_own_half = db.Column(db.Integer, nullable=True, index = True)
-    Ball_recoveries = db.Column(db.Integer, nullable=True, index = True)
-    Ball_recoveries_in_opponents_half = db.Column(db.Integer, nullable=True, index = True)
-    Challenges = db.Column(db.Integer, nullable=True, index = True)
-    Challenges_won_present = db.Column(db.Integer, nullable=True, index = True)
-    Defensive_challenges = db.Column(db.Integer, nullable=True, index = True)
-    Challenges_in_defence_won_present = db.Column(db.Integer, nullable=True, index = True)
-    Attacking_challenges = db.Column(db.Integer, nullable=True, index = True)
-    Challenges_in_attack__won_present = db.Column(db.Integer, nullable=True, index = True)
-    Air_challenges = db.Column(db.Integer, nullable=True, index = True)
-    Air_challenges_won_present = db.Column(db.Integer, nullable=True, index = True)
-    Dribbles = db.Column(db.Integer, nullable=True, index = True)
-    Successful_dribbles_present = db.Column(db.Integer, nullable=True, index = True)
-    Tackles = db.Column(db.Integer, nullable=True, index = True)
-    Tackles_won_present = db.Column(db.Integer, nullable=True, index = True)
-    Ball_interceptions = db.Column(db.Integer, nullable=True, index = True)
-    Free_ball_pick_ups = db.Column(db.Integer, nullable=True, index = True)
+    Goals = db.Column(db.Float, nullable=True, index = True)
+    Assists = db.Column(db.Float, nullable=True, index = True)
+    Chances = db.Column(db.Float, nullable=True, index = True)
+    Chances_successful = db.Column(db.Float, nullable=True, index = True)
+    Chances_present_of_conversion = db.Column(db.Float, nullable=True, index = True)
+    Сhances_created = db.Column(db.Float, nullable=True, index = True)
+    Fouls = db.Column(db.Float, nullable=True, index = True)
+    Fouls_suffered = db.Column(db.Float, nullable=True, index = True)
+    Yellow_cards = db.Column(db.Float, nullable=True, index = True)
+    Red_cards = db.Column(db.Float, nullable=True, index = True)
+    Offsides = db.Column(db.Float, nullable=True, index = True)
+    Shots = db.Column(db.Float, nullable=True, index = True)
+    Shots_on_target = db.Column(db.Float, nullable=True, index = True)
+    Expected_goals = db.Column(db.Float, nullable=True, index = True)
+    Passes = db.Column(db.Float, nullable=True, index = True)
+    Accurate_passes_present = db.Column(db.Float, nullable=True, index = True)
+    Key_passes = db.Column(db.Float, nullable=True, index = True)
+    Key_passes_accuracy_present = db.Column(db.Float, nullable=True, index = True)
+    Crosses = db.Column(db.Float, nullable=True, index = True)
+    Accurate_crosses_present = db.Column(db.Float, nullable=True, index = True)
+    Lost_balls = db.Column(db.Float, nullable=True, index = True)
+    Lost_balls_in_own_half = db.Column(db.Float, nullable=True, index = True)
+    Ball_recoveries = db.Column(db.Float, nullable=True, index = True)
+    Ball_recoveries_in_opponents_half = db.Column(db.Float, nullable=True, index = True)
+    Challenges = db.Column(db.Float, nullable=True, index = True)
+    Challenges_won_present = db.Column(db.Float, nullable=True, index = True)
+    Defensive_challenges = db.Column(db.Float, nullable=True, index = True)
+    Challenges_in_defence_won_present = db.Column(db.Float, nullable=True, index = True)
+    Attacking_challenges = db.Column(db.Float, nullable=True, index = True)
+    Challenges_in_attack__won_present = db.Column(db.Float, nullable=True, index = True)
+    Air_challenges = db.Column(db.Float, nullable=True, index = True)
+    Air_challenges_won_present = db.Column(db.Float, nullable=True, index = True)
+    Dribbles = db.Column(db.Float, nullable=True, index = True)
+    Successful_dribbles_present = db.Column(db.Float, nullable=True, index = True)
+    Tackles = db.Column(db.Float, nullable=True, index = True)
+    Tackles_won_present = db.Column(db.Float, nullable=True, index = True)
+    Ball_interceptions = db.Column(db.Float, nullable=True, index = True)
+    Free_ball_pick_ups = db.Column(db.Float, nullable=True, index = True)
 
 db.create_all()
 
@@ -150,7 +149,8 @@ def home():
                 print('file is not xlsx')
                 return redirect(request.url)
             else:
-                new_df = pd.read_excel(ecxel_file).copy()
+                new_df = pd.read_excel(ecxel_file)
+                new_df = new_df.fillna(0)
 
                 ext = ecxel_file.filename.rsplit('.')[0]
                 ext2 = ext.rsplit('_')[-1:]
@@ -195,12 +195,11 @@ def home():
 
 
                 df_average = new_df[new_df["Opponent"] == "Average per match"]
-                # print(df_average)
                 to_drop = ['player_id']
                 df_average.drop(columns=to_drop, inplace=True)
                 df_average.rename(columns={'player_id':'player_average_id'})
                 df_average.insert(0,'player_average_id', player_id_number, True)
-                # print(df_average)
+            
                 df_average.to_sql(name='player_Average', con=db.engine, if_exists='append',  index=False)
                 db.session.commit()
 
@@ -213,7 +212,9 @@ def home():
                 dataframe = pd.read_sql('''SELECT * FROM "player_Average"''', con = db.engine)
                 dataframe = dataframe.to_html()
 
-            return render_template('index.html',all_data=all_data , tabel=tabel, dataframe=dataframe)
+            # return render_template('index.html',all_data=all_data , tabel=tabel, dataframe=dataframe)
+            return redirect(request.url)
+
         
         elif request.form['submit_button'] == 'show_parameters':
             parameters_1 = request.form["parameters_1"]
@@ -249,7 +250,7 @@ def home():
     tabel_parameters = dataframe.columns.values.tolist()
     # dataframe = dataframe.to_html()
 
-    tabel_of_firest_parameter = dataframe[(dataframe['players_name']=="Ivan Nasberg") | (dataframe['players_name']=="Herolind Shala") | (dataframe['players_name']=="Luis Felipe")]
+    tabel_of_firest_parameter = dataframe[(dataframe['players_name']=="Gela Zaseev") | (dataframe['players_name']=="Herold Goulon") | (dataframe['players_name']=="Shinya Nakano")]
     tabel_of_firest_parameter = tabel_of_firest_parameter[["players_name", 'Challenges', 'Challenges_in_defence_won_present']]
     tabel_of_firest_parameter['ratio_A/B'] = tabel_of_firest_parameter['Challenges_in_defence_won_present']/tabel_of_firest_parameter['Challenges']
     dan_1=tabel_of_firest_parameter.columns.values.tolist()
@@ -325,20 +326,20 @@ def parameters():
     dataframe = pd.read_sql('''SELECT * FROM "player_Average"''', con = db.engine)
     player_Name_options_list = dataframe['players_name'].tolist()
     tabel_parameters = dataframe.columns.values.tolist()
-    # dataframe = dataframe.to_html()
+    dataframe = dataframe.to_html()
 
-    tabel_of_firest_parameter = dataframe[(dataframe['players_name']=="Eden Shamir") | (dataframe['players_name']=="N'Golo Kante") | (dataframe['players_name']=="Franck Bilal Ribery") | (dataframe['players_name']=="Alberto Moreno") | (dataframe['players_name']=="Moise Kean")]
-    tabel_of_firest_parameter = tabel_of_firest_parameter[["players_name", "Passes", "Attacking_challenges", "Dribbles", "Accurate_passes_present", "Key_passes_accuracy_present"]]
-    tabel_of_firest_parameter = tabel_of_firest_parameter.fillna(0)
-    dan_1=tabel_of_firest_parameter.columns.values.tolist()
-    dan_2=tabel_of_firest_parameter.iloc[0].tolist()
-    dan_3=tabel_of_firest_parameter.iloc[1].tolist()
-    dan_4=tabel_of_firest_parameter.iloc[2].tolist()
-    dan_5=tabel_of_firest_parameter.iloc[3].tolist()
-    dan_6=tabel_of_firest_parameter.iloc[4].tolist()
-    dataframe = tabel_of_firest_parameter.to_html()
+    # tabel_of_firest_parameter = dataframe[(dataframe['players_name']=="Eden Shamir") | (dataframe['players_name']=="N'Golo Kante") | (dataframe['players_name']=="Franck Bilal Ribery") | (dataframe['players_name']=="Alberto Moreno") | (dataframe['players_name']=="Moise Kean")]
+    # tabel_of_firest_parameter = tabel_of_firest_parameter[["players_name", "Passes", "Attacking_challenges", "Dribbles", "Accurate_passes_present", "Key_passes_accuracy_present"]]
+    # tabel_of_firest_parameter = tabel_of_firest_parameter.fillna(0)
+    # dan_1=tabel_of_firest_parameter.columns.values.tolist()
+    # dan_2=tabel_of_firest_parameter.iloc[0].tolist()
+    # dan_3=tabel_of_firest_parameter.iloc[1].tolist()
+    # dan_4=tabel_of_firest_parameter.iloc[2].tolist()
+    # dan_5=tabel_of_firest_parameter.iloc[3].tolist()
+    # dan_6=tabel_of_firest_parameter.iloc[4].tolist()
+    # dataframe = tabel_of_firest_parameter.to_html()
 
-    return render_template("parameters5.html",dataframe=dataframe, tabel_parameters=tabel_parameters,player_Name_options_list=player_Name_options_list,dan_1=dan_1,dan_2=dan_2,dan_3=dan_3,dan_4=dan_4,dan_5=dan_5,dan_6=dan_6)
+    return render_template("parameters5.html",dataframe=dataframe, tabel_parameters=tabel_parameters,player_Name_options_list=player_Name_options_list) #,dan_1=dan_1,dan_2=dan_2,dan_3=dan_3,dan_4=dan_4,dan_5=dan_5,dan_6=dan_6
 
 
 @app.route('/scatter', methods=['GET', 'POST'])
