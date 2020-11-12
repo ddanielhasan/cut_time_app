@@ -109,6 +109,9 @@ class Player_Average(db.Model):
     xG_conversion = db.Column(db.Float, nullable=True, index = True)
     xG_with_a_player_on = db.Column(db.Float, nullable=True, index = True)
     Defensive_xG_per_shot = db.Column(db.Float, nullable=True, index = True)
+    Unnamed_fuckin_4E = db.Column(db.Float, nullable=True, index = True)
+    Unnamed_fuckin_16Q = db.Column(db.Float, nullable=True, index = True)
+    Unnamed_fuckin_17R = db.Column(db.Float, nullable=True, index = True)
 
 
 class Player(db.Model):
@@ -187,6 +190,9 @@ class Player(db.Model):
     xG_conversion = db.Column(db.Float, nullable=True, index = True)
     xG_with_a_player_on = db.Column(db.Float, nullable=True, index = True)
     Defensive_xG_per_shot = db.Column(db.Float, nullable=True, index = True) 
+    Unnamed_fuckin_4E = db.Column(db.Float, nullable=True, index = True)
+    Unnamed_fuckin_16Q = db.Column(db.Float, nullable=True, index = True)
+    Unnamed_fuckin_17R = db.Column(db.Float, nullable=True, index = True)
 
 db.create_all()
 
@@ -224,7 +230,7 @@ def home():
 
                 if player_name_1 in existing_players:
                     print('this player exist')
-                    #return redirect(request.url)
+                    return redirect(request.url)
                 
                 first_playername = Player_Name(player_name= player_name_1)
                 db.session.add(first_playername)
@@ -242,8 +248,7 @@ def home():
                 new_df.insert(0,'player_id', player_id_number, True)
 
                 #for firest version- new_df.rename(columns={'players name':'players_name','Chances successful':'Chances_successful', "Chances, % of conversion":'Chances_present_of_conversion', 'Сhances created':'Сhances_created', 'Fouls suffered':'Fouls_suffered', 'Yellow cards':'Yellow_cards', 'Red cards':'Red_cards', 'Shots on target':'Shots_on_target','xG (Expected goals)':'Expected_goals', 'Accurate passes, %':'Accurate_passes_present', 'Key passes':'Key_passes', 'Key passes accuracy, %':'Key_passes_accuracy_present', 'Accurate crosses, %':'Accurate_crosses_present', 'Lost balls':'Lost_balls', "Lost balls in own half":"Lost_balls_in_own_half", 'Ball recoveries':'Ball_recoveries', "Ball recoveries in opponent's half":'Ball_recoveries_in_opponents_half', 'Challenges won, %':'Challenges_won_present', 'Defensive challenges':'Defensive_challenges', 'Challenges in defence won, %':'Challenges_in_defence_won_present', 'Attacking challenges':'Attacking_challenges', 'Challenges in attack / won, %':'Challenges_in_attack__won_present', 'Air challenges':'Air_challenges', 'Air challenges won, %':'Air_challenges_won_present', 'Successful dribbles, %':'Successful_dribbles_present', 'Tackles won, %':'Tackles_won_present', 'Ball interceptions':'Ball_interceptions', 'Free ball pick ups':'Free_ball_pick_ups'}, inplace=True)
-                new_df.rename(columns={'players name':'players_name','Chances successful':'Chances_successful', "Chances, % of conversion":'Chances_present_of_conversion', 'Сhances created':'Сhances_created', 'Fouls suffered':'Fouls_suffered', 'Yellow cards':'Yellow_cards', 'Red cards':'Red_cards', 'Shots on target':'Shots_on_target','xG (Expected goals)':'Expected_goals', 'Accurate passes, %':'Accurate_passes_present',"Unnamed: 22":'Unnamed_fuckin_22W',"Unnamed: 23":'Unnamed_fuckin_23X', 'Key passes':'Key_passes', 'Key passes accuracy, %':'Key_passes_accuracy_present', 'Accurate crosses, %':'Accurate_crosses_present', 'Lost balls':'Lost_balls', "Lost balls in own half":"Lost_balls_in_own_half", 'Ball recoveries':'Ball_recoveries', "Ball recoveries in opponent's half":'Ball_recoveries_in_opponents_half', 'Challenges won, %':'Challenges_won_present', 'Defensive challenges':'Defensive_challenges', 'Challenges in defence won, %':'Challenges_in_defence_won_present', 'Attacking challenges':'Attacking_challenges', 'Challenges in attack / won, %':'Challenges_in_attack__won_present', 'Air challenges':'Air_challenges','Air challenges won':'Air_challenges_won', "Air challenges won, %":'Air_challenges_won_present', 'Successful dribbles, %':'Successful_dribbles_present', 'Tackles won, %':'Tackles_won_present', 'Ball interceptions':'Ball_interceptions', 'Free ball pick ups':'Free_ball_pick_ups','Challenges won':'Challenges_won','Defensive challenges won':'Defensive_challenges_won','Attacking challenges won':'Attacking_challenges_won','Dribbles successful':'Dribbles_successful','Tackles successful':'Tackles_successful','Accurate passes':'Accurate_passes','Key passes':'Key_passes','Key passes accurate':'Key_passes_accurate','Crosses accurate':'Crosses_accurate','Successful actions, %':'Successful_actions_Percent','Shots on target, %':'Shots_on_target_Percent','Shots on post / bar':'Shots_on_post_bar',"Opponent's xG with a player on":"Opponents_xG_with_a_player_on","Net xG (xG player on - opp. team's xG)":"Net_xG_xG_player_on_opp_teams_xG","Defensive xG (xG of shots made by guarded player)":"Defensive_xG_xG_of_shots_made_by_guarded_player",'Minutes played':'Minutes_played','Total actions':'Total_actions','Successful actions':'Successful_actions','Shots wide':'Shots_wide','Blocked shots':'Blocked_shots','Expected assists':'Expected_assists','xG per shot':'xG_per_shot','xG per goal':'xG_per_goal','xG conversion':'xG_conversion',"xG with a player on":'xG_with_a_player_on','Defensive xG per shot':'Defensive_xG_per_shot'}, inplace=True)
-                # ,'Minutes played':'Minutes_played','Total actions':'Total_actions','Successful actions':'Successful_actions','Shots wide':'Shots_wide','Blocked shots':'Blocked_shots','Expected assists':'Expected_assists','xG per shot':'xG_per_shot','xG per goal':'xG_per_goal','xG conversion':'xG_conversion','xG with a player on':'xG_with_a_player_on','Defensive xG per shot':'Defensive_xG_per_shot'
+                new_df.rename(columns={'players name':'players_name','Chances successful':'Chances_successful', "Chances, % of conversion":'Chances_present_of_conversion', 'Сhances created':'Сhances_created', 'Fouls suffered':'Fouls_suffered', 'Yellow cards':'Yellow_cards', 'Red cards':'Red_cards', 'Shots on target':'Shots_on_target','xG (Expected goals)':'Expected_goals', 'Accurate passes, %':'Accurate_passes_present',"Unnamed: 4":'Unnamed_fuckin_4E',"Unnamed: 16":'Unnamed_fuckin_16Q',"Unnamed: 17":'Unnamed_fuckin_17R',"Unnamed: 22":'Unnamed_fuckin_22W',"Unnamed: 23":'Unnamed_fuckin_23X', 'Key passes':'Key_passes', 'Key passes accuracy, %':'Key_passes_accuracy_present', 'Accurate crosses, %':'Accurate_crosses_present', 'Lost balls':'Lost_balls', "Lost balls in own half":"Lost_balls_in_own_half", 'Ball recoveries':'Ball_recoveries', "Ball recoveries in opponent's half":'Ball_recoveries_in_opponents_half', 'Challenges won, %':'Challenges_won_present', 'Defensive challenges':'Defensive_challenges', 'Challenges in defence won, %':'Challenges_in_defence_won_present', 'Attacking challenges':'Attacking_challenges', 'Challenges in attack / won, %':'Challenges_in_attack__won_present', 'Air challenges':'Air_challenges','Air challenges won':'Air_challenges_won', "Air challenges won, %":'Air_challenges_won_present', 'Successful dribbles, %':'Successful_dribbles_present', 'Tackles won, %':'Tackles_won_present', 'Ball interceptions':'Ball_interceptions', 'Free ball pick ups':'Free_ball_pick_ups','Challenges won':'Challenges_won','Defensive challenges won':'Defensive_challenges_won','Attacking challanges won':'Attacking_challenges_won','Attacking challenges won':'Attacking_challenges_won','Dribbles successful':'Dribbles_successful','Tackles successful':'Tackles_successful','Accurate passes':'Accurate_passes','Key passes':'Key_passes','Key passes accurate':'Key_passes_accurate','Crosses accurate':'Crosses_accurate','Successful actions, %':'Successful_actions_Percent','Shots on target, %':'Shots_on_target_Percent','Shots on post / bar':'Shots_on_post_bar',"Opponent's xG with a player on":"Opponents_xG_with_a_player_on","Net xG (xG player on - opp. team's xG)":"Net_xG_xG_player_on_opp_teams_xG","Defensive xG (xG of shots made by guarded player)":"Defensive_xG_xG_of_shots_made_by_guarded_player",'Minutes played':'Minutes_played','Total actions':'Total_actions','Successful actions':'Successful_actions','Shots wide':'Shots_wide','Blocked shots':'Blocked_shots','Expected assists':'Expected_assists','xG per shot':'xG_per_shot','xG per goal':'xG_per_goal','xG conversion':'xG_conversion',"xG with a player on":'xG_with_a_player_on','Defensive xG per shot':'Defensive_xG_per_shot'}, inplace=True)
                 def delete(item):
                     if item == "-":
                         item = 0
@@ -257,6 +262,12 @@ def home():
 
 
                 df_average = new_df[new_df["Opponent"] == "Average per match"]
+                
+                found = new_df[new_df['Opponent'].str.contains('Average per match')]
+                if len(found) == 0:
+                    print( "F U C K YYYYYYYYY")
+                    df_average = new_df[new_df["Opponent"] == "Total"]
+                
                 to_drop = ['player_id']
                 df_average.drop(columns=to_drop, inplace=True)
                 df_average.rename(columns={'player_id':'player_average_id'})
@@ -388,20 +399,20 @@ def parameters():
     dataframe = pd.read_sql('''SELECT * FROM "player_Average"''', con = db.engine)
     player_Name_options_list = dataframe['players_name'].tolist()
     tabel_parameters = dataframe.columns.values.tolist()
-    dataframe = dataframe.to_html()
+    # dataframe = dataframe.to_html()
 
-    # tabel_of_firest_parameter = dataframe[(dataframe['players_name']=="Eden Shamir") | (dataframe['players_name']=="N'Golo Kante") | (dataframe['players_name']=="Franck Bilal Ribery") | (dataframe['players_name']=="Alberto Moreno") | (dataframe['players_name']=="Moise Kean")]
-    # tabel_of_firest_parameter = tabel_of_firest_parameter[["players_name", "Passes", "Attacking_challenges", "Dribbles", "Accurate_passes_present", "Key_passes_accuracy_present"]]
-    # tabel_of_firest_parameter = tabel_of_firest_parameter.fillna(0)
-    # dan_1=tabel_of_firest_parameter.columns.values.tolist()
-    # dan_2=tabel_of_firest_parameter.iloc[0].tolist()
-    # dan_3=tabel_of_firest_parameter.iloc[1].tolist()
-    # dan_4=tabel_of_firest_parameter.iloc[2].tolist()
-    # dan_5=tabel_of_firest_parameter.iloc[3].tolist()
-    # dan_6=tabel_of_firest_parameter.iloc[4].tolist()
-    # dataframe = tabel_of_firest_parameter.to_html()
+    tabel_of_firest_parameter = dataframe[(dataframe['players_name']=="Tzlil Nechemia") | (dataframe['players_name']=="Idan Ahadnani") | (dataframe['players_name']=="Ran Israel Vaturi") | (dataframe['players_name']=="Dan Bitton") | (dataframe['players_name']=="Nadav Aviv Niddam")]
+    tabel_of_firest_parameter = tabel_of_firest_parameter[["players_name", "Passes", "Attacking_challenges", "Dribbles", "Accurate_passes_present", "Key_passes_accuracy_present"]]
+    tabel_of_firest_parameter = tabel_of_firest_parameter.fillna(0)
+    dan_1=tabel_of_firest_parameter.columns.values.tolist()
+    dan_2=tabel_of_firest_parameter.iloc[0].tolist()
+    dan_3=tabel_of_firest_parameter.iloc[1].tolist()
+    dan_4=tabel_of_firest_parameter.iloc[2].tolist()
+    dan_5=tabel_of_firest_parameter.iloc[3].tolist()
+    dan_6=tabel_of_firest_parameter.iloc[4].tolist()
+    dataframe = tabel_of_firest_parameter.to_html()
 
-    return render_template("parameters5.html",dataframe=dataframe, tabel_parameters=tabel_parameters,player_Name_options_list=player_Name_options_list) #,dan_1=dan_1,dan_2=dan_2,dan_3=dan_3,dan_4=dan_4,dan_5=dan_5,dan_6=dan_6
+    return render_template("parameters5.html",dataframe=dataframe, tabel_parameters=tabel_parameters,player_Name_options_list=player_Name_options_list,dan_1=dan_1,dan_2=dan_2,dan_3=dan_3,dan_4=dan_4,dan_5=dan_5,dan_6=dan_6)
 
 
 @app.route('/scatter', methods=['GET', 'POST'])
