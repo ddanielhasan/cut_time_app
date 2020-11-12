@@ -57,6 +57,8 @@ class Player_Average(db.Model):
     Expected_goals = db.Column(db.Float, nullable=True, index = True)
     Passes = db.Column(db.Float, nullable=True, index = True)
     Accurate_passes_present = db.Column(db.Float, nullable=True, index = True)
+    Unnamed_fuckin_22W = db.Column(db.Float, nullable=True, index = True)
+    Unnamed_fuckin_23X = db.Column(db.Float, nullable=True, index = True)
     Key_passes = db.Column(db.Float, nullable=True, index = True)
     Key_passes_accuracy_present = db.Column(db.Float, nullable=True, index = True)
     Crosses = db.Column(db.Float, nullable=True, index = True)
@@ -72,6 +74,7 @@ class Player_Average(db.Model):
     Attacking_challenges = db.Column(db.Float, nullable=True, index = True)
     Challenges_in_attack__won_present = db.Column(db.Float, nullable=True, index = True)
     Air_challenges = db.Column(db.Float, nullable=True, index = True)
+    Air_challenges_won = db.Column(db.Float, nullable=True, index = True)
     Air_challenges_won_present = db.Column(db.Float, nullable=True, index = True)
     Dribbles = db.Column(db.Float, nullable=True, index = True)
     Successful_dribbles_present = db.Column(db.Float, nullable=True, index = True)
@@ -79,6 +82,33 @@ class Player_Average(db.Model):
     Tackles_won_present = db.Column(db.Float, nullable=True, index = True)
     Ball_interceptions = db.Column(db.Float, nullable=True, index = True)
     Free_ball_pick_ups = db.Column(db.Float, nullable=True, index = True)
+    Challenges_won = db.Column(db.Float, nullable=True, index = True)
+    Defensive_challenges_won = db.Column(db.Float, nullable=True, index = True)
+    Attacking_challenges_won = db.Column(db.Float, nullable=True, index = True)
+    # Air_challenges_won_Percent = db.Column(db.Float, nullable=True, index = True)
+    Dribbles_successful = db.Column(db.Float, nullable=True, index = True)
+    Tackles_successful = db.Column(db.Float, nullable=True, index = True)
+    Accurate_passes = db.Column(db.Float, nullable=True, index = True)
+    Key_passes = db.Column(db.Float, nullable=True, index = True)
+    Key_passes_accurate = db.Column(db.Float, nullable=True, index = True)
+    Crosses_accurate = db.Column(db.Float, nullable=True, index = True)
+    Successful_actions_Percent = db.Column(db.Float, nullable=True, index = True)
+    Shots_on_target_Percent = db.Column(db.Float, nullable=True, index = True)
+    Shots_on_post_bar = db.Column(db.Float, nullable=True, index = True)
+    Opponents_xG_with_a_player_on = db.Column(db.Float, nullable=True, index = True)
+    Net_xG_xG_player_on_opp_teams_xG = db.Column(db.Float, nullable=True, index = True)
+    Defensive_xG_xG_of_shots_made_by_guarded_player = db.Column(db.Float, nullable=True, index = True)
+    Minutes_played = db.Column(db.Float, nullable=True, index = True)
+    Total_actions = db.Column(db.Float, nullable=True, index = True)
+    Successful_actions = db.Column(db.Float, nullable=True, index = True)
+    Shots_wide = db.Column(db.Float, nullable=True, index = True)
+    Blocked_shots = db.Column(db.Float, nullable=True, index = True)
+    Expected_assists = db.Column(db.Float, nullable=True, index = True)
+    xG_per_shot = db.Column(db.Float, nullable=True, index = True)
+    xG_per_goal = db.Column(db.Float, nullable=True, index = True)
+    xG_conversion = db.Column(db.Float, nullable=True, index = True)
+    xG_with_a_player_on = db.Column(db.Float, nullable=True, index = True)
+    Defensive_xG_per_shot = db.Column(db.Float, nullable=True, index = True)
 
 
 class Player(db.Model):
@@ -105,6 +135,8 @@ class Player(db.Model):
     Expected_goals = db.Column(db.Float, nullable=True, index = True)
     Passes = db.Column(db.Float, nullable=True, index = True)
     Accurate_passes_present = db.Column(db.Float, nullable=True, index = True)
+    Unnamed_fuckin_22W = db.Column(db.Float, nullable=True, index = True)
+    Unnamed_fuckin_23X = db.Column(db.Float, nullable=True, index = True)
     Key_passes = db.Column(db.Float, nullable=True, index = True)
     Key_passes_accuracy_present = db.Column(db.Float, nullable=True, index = True)
     Crosses = db.Column(db.Float, nullable=True, index = True)
@@ -120,6 +152,7 @@ class Player(db.Model):
     Attacking_challenges = db.Column(db.Float, nullable=True, index = True)
     Challenges_in_attack__won_present = db.Column(db.Float, nullable=True, index = True)
     Air_challenges = db.Column(db.Float, nullable=True, index = True)
+    Air_challenges_won = db.Column(db.Float, nullable=True, index = True)
     Air_challenges_won_present = db.Column(db.Float, nullable=True, index = True)
     Dribbles = db.Column(db.Float, nullable=True, index = True)
     Successful_dribbles_present = db.Column(db.Float, nullable=True, index = True)
@@ -127,6 +160,33 @@ class Player(db.Model):
     Tackles_won_present = db.Column(db.Float, nullable=True, index = True)
     Ball_interceptions = db.Column(db.Float, nullable=True, index = True)
     Free_ball_pick_ups = db.Column(db.Float, nullable=True, index = True)
+    Challenges_won = db.Column(db.Float, nullable=True, index = True)
+    Defensive_challenges_won = db.Column(db.Float, nullable=True, index = True)
+    Attacking_challenges_won = db.Column(db.Float, nullable=True, index = True)
+    # Air_challenges_won_Percent = db.Column(db.Float, nullable=True, index = True)
+    Dribbles_successful = db.Column(db.Float, nullable=True, index = True)
+    Tackles_successful = db.Column(db.Float, nullable=True, index = True)
+    Accurate_passes = db.Column(db.Float, nullable=True, index = True)
+    Key_passes = db.Column(db.Float, nullable=True, index = True)
+    Key_passes_accurate = db.Column(db.Float, nullable=True, index = True)
+    Crosses_accurate = db.Column(db.Float, nullable=True, index = True)
+    Successful_actions_Percent = db.Column(db.Float, nullable=True, index = True)
+    Shots_on_target_Percent = db.Column(db.Float, nullable=True, index = True)
+    Shots_on_post_bar = db.Column(db.Float, nullable=True, index = True)
+    Opponents_xG_with_a_player_on = db.Column(db.Float, nullable=True, index = True)
+    Net_xG_xG_player_on_opp_teams_xG = db.Column(db.Float, nullable=True, index = True)
+    Defensive_xG_xG_of_shots_made_by_guarded_player = db.Column(db.Float, nullable=True, index = True)
+    Minutes_played = db.Column(db.Float, nullable=True, index = True)
+    Total_actions = db.Column(db.Float, nullable=True, index = True)
+    Successful_actions = db.Column(db.Float, nullable=True, index = True)
+    Shots_wide = db.Column(db.Float, nullable=True, index = True)
+    Blocked_shots = db.Column(db.Float, nullable=True, index = True)
+    Expected_assists = db.Column(db.Float, nullable=True, index = True)
+    xG_per_shot = db.Column(db.Float, nullable=True, index = True)
+    xG_per_goal = db.Column(db.Float, nullable=True, index = True)
+    xG_conversion = db.Column(db.Float, nullable=True, index = True)
+    xG_with_a_player_on = db.Column(db.Float, nullable=True, index = True)
+    Defensive_xG_per_shot = db.Column(db.Float, nullable=True, index = True) 
 
 db.create_all()
 
@@ -164,7 +224,7 @@ def home():
 
                 if player_name_1 in existing_players:
                     print('this player exist')
-                    return redirect(request.url)
+                    #return redirect(request.url)
                 
                 first_playername = Player_Name(player_name= player_name_1)
                 db.session.add(first_playername)
@@ -181,7 +241,9 @@ def home():
                 new_df.insert(0,'players name', player_name_1, True)
                 new_df.insert(0,'player_id', player_id_number, True)
 
-                new_df.rename(columns={'players name':'players_name','Chances successful':'Chances_successful', "Chances, % of conversion":'Chances_present_of_conversion', 'Сhances created':'Сhances_created', 'Fouls suffered':'Fouls_suffered', 'Yellow cards':'Yellow_cards', 'Red cards':'Red_cards', 'Shots on target':'Shots_on_target','xG (Expected goals)':'Expected_goals', 'Accurate passes, %':'Accurate_passes_present', 'Key passes':'Key_passes', 'Key passes accuracy, %':'Key_passes_accuracy_present', 'Accurate crosses, %':'Accurate_crosses_present', 'Lost balls':'Lost_balls', "Lost balls in own half":"Lost_balls_in_own_half", 'Ball recoveries':'Ball_recoveries', "Ball recoveries in opponent's half":'Ball_recoveries_in_opponents_half', 'Challenges won, %':'Challenges_won_present', 'Defensive challenges':'Defensive_challenges', 'Challenges in defence won, %':'Challenges_in_defence_won_present', 'Attacking challenges':'Attacking_challenges', 'Challenges in attack / won, %':'Challenges_in_attack__won_present', 'Air challenges':'Air_challenges', 'Air challenges won, %':'Air_challenges_won_present', 'Successful dribbles, %':'Successful_dribbles_present', 'Tackles won, %':'Tackles_won_present', 'Ball interceptions':'Ball_interceptions', 'Free ball pick ups':'Free_ball_pick_ups'}, inplace=True)
+                #for firest version- new_df.rename(columns={'players name':'players_name','Chances successful':'Chances_successful', "Chances, % of conversion":'Chances_present_of_conversion', 'Сhances created':'Сhances_created', 'Fouls suffered':'Fouls_suffered', 'Yellow cards':'Yellow_cards', 'Red cards':'Red_cards', 'Shots on target':'Shots_on_target','xG (Expected goals)':'Expected_goals', 'Accurate passes, %':'Accurate_passes_present', 'Key passes':'Key_passes', 'Key passes accuracy, %':'Key_passes_accuracy_present', 'Accurate crosses, %':'Accurate_crosses_present', 'Lost balls':'Lost_balls', "Lost balls in own half":"Lost_balls_in_own_half", 'Ball recoveries':'Ball_recoveries', "Ball recoveries in opponent's half":'Ball_recoveries_in_opponents_half', 'Challenges won, %':'Challenges_won_present', 'Defensive challenges':'Defensive_challenges', 'Challenges in defence won, %':'Challenges_in_defence_won_present', 'Attacking challenges':'Attacking_challenges', 'Challenges in attack / won, %':'Challenges_in_attack__won_present', 'Air challenges':'Air_challenges', 'Air challenges won, %':'Air_challenges_won_present', 'Successful dribbles, %':'Successful_dribbles_present', 'Tackles won, %':'Tackles_won_present', 'Ball interceptions':'Ball_interceptions', 'Free ball pick ups':'Free_ball_pick_ups'}, inplace=True)
+                new_df.rename(columns={'players name':'players_name','Chances successful':'Chances_successful', "Chances, % of conversion":'Chances_present_of_conversion', 'Сhances created':'Сhances_created', 'Fouls suffered':'Fouls_suffered', 'Yellow cards':'Yellow_cards', 'Red cards':'Red_cards', 'Shots on target':'Shots_on_target','xG (Expected goals)':'Expected_goals', 'Accurate passes, %':'Accurate_passes_present',"Unnamed: 22":'Unnamed_fuckin_22W',"Unnamed: 23":'Unnamed_fuckin_23X', 'Key passes':'Key_passes', 'Key passes accuracy, %':'Key_passes_accuracy_present', 'Accurate crosses, %':'Accurate_crosses_present', 'Lost balls':'Lost_balls', "Lost balls in own half":"Lost_balls_in_own_half", 'Ball recoveries':'Ball_recoveries', "Ball recoveries in opponent's half":'Ball_recoveries_in_opponents_half', 'Challenges won, %':'Challenges_won_present', 'Defensive challenges':'Defensive_challenges', 'Challenges in defence won, %':'Challenges_in_defence_won_present', 'Attacking challenges':'Attacking_challenges', 'Challenges in attack / won, %':'Challenges_in_attack__won_present', 'Air challenges':'Air_challenges','Air challenges won':'Air_challenges_won', "Air challenges won, %":'Air_challenges_won_present', 'Successful dribbles, %':'Successful_dribbles_present', 'Tackles won, %':'Tackles_won_present', 'Ball interceptions':'Ball_interceptions', 'Free ball pick ups':'Free_ball_pick_ups','Challenges won':'Challenges_won','Defensive challenges won':'Defensive_challenges_won','Attacking challenges won':'Attacking_challenges_won','Dribbles successful':'Dribbles_successful','Tackles successful':'Tackles_successful','Accurate passes':'Accurate_passes','Key passes':'Key_passes','Key passes accurate':'Key_passes_accurate','Crosses accurate':'Crosses_accurate','Successful actions, %':'Successful_actions_Percent','Shots on target, %':'Shots_on_target_Percent','Shots on post / bar':'Shots_on_post_bar',"Opponent's xG with a player on":"Opponents_xG_with_a_player_on","Net xG (xG player on - opp. team's xG)":"Net_xG_xG_player_on_opp_teams_xG","Defensive xG (xG of shots made by guarded player)":"Defensive_xG_xG_of_shots_made_by_guarded_player",'Minutes played':'Minutes_played','Total actions':'Total_actions','Successful actions':'Successful_actions','Shots wide':'Shots_wide','Blocked shots':'Blocked_shots','Expected assists':'Expected_assists','xG per shot':'xG_per_shot','xG per goal':'xG_per_goal','xG conversion':'xG_conversion',"xG with a player on":'xG_with_a_player_on','Defensive xG per shot':'Defensive_xG_per_shot'}, inplace=True)
+                # ,'Minutes played':'Minutes_played','Total actions':'Total_actions','Successful actions':'Successful_actions','Shots wide':'Shots_wide','Blocked shots':'Blocked_shots','Expected assists':'Expected_assists','xG per shot':'xG_per_shot','xG per goal':'xG_per_goal','xG conversion':'xG_conversion','xG with a player on':'xG_with_a_player_on','Defensive xG per shot':'Defensive_xG_per_shot'
                 def delete(item):
                     if item == "-":
                         item = 0
@@ -250,7 +312,7 @@ def home():
     tabel_parameters = dataframe.columns.values.tolist()
     # dataframe = dataframe.to_html()
 
-    tabel_of_firest_parameter = dataframe[(dataframe['players_name']=="Gela Zaseev") | (dataframe['players_name']=="Herold Goulon") | (dataframe['players_name']=="Shinya Nakano")]
+    tabel_of_firest_parameter = dataframe[(dataframe['players_name']=="Tzlil Nechemia") | (dataframe['players_name']=="Idan Ahadnani") | (dataframe['players_name']=="Ran Israel Vaturi")]
     tabel_of_firest_parameter = tabel_of_firest_parameter[["players_name", 'Challenges', 'Challenges_in_defence_won_present']]
     tabel_of_firest_parameter['ratio_A/B'] = tabel_of_firest_parameter['Challenges_in_defence_won_present']/tabel_of_firest_parameter['Challenges']
     dan_1=tabel_of_firest_parameter.columns.values.tolist()
